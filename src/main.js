@@ -4,4 +4,7 @@ import router from "./router/index.js";
 import "./style/ClearDefault.css";
 import "amfe-flexible/index.js";
 
-createApp(App).use(router).mount("#app");
+import { createPinia } from "pinia";
+const pinia = createPinia();
+
+createApp(App).use(router).use(pinia).mount("#app");

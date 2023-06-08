@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import postCssPxToRem from "postcss-pxtorem";
-
+import { resolve } from "path";
 export default defineConfig({
   base: "./",
   plugins: [
@@ -26,5 +26,14 @@ export default defineConfig({
     host: "localhost",
     open: true,
     port: 3000,
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+      "@u": resolve(__dirname, "src/utils"),
+      "@a": resolve(__dirname, "src/api"),
+      "@c": resolve(__dirname, "src/components"),
+      "@s": resolve(__dirname, "src/store"),
+    },
   },
 });
