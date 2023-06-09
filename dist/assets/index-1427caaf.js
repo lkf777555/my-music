@@ -1,0 +1,1 @@
+import{o as r,c as s}from"./index-3155803f.js";const a=(t,c)=>{const e=t.__vccOpts||t;for(const[n,o]of c)e[n]=o;return e},_={};function f(t,c){return r(),s("div",null,"actions")}const i=a(_,[["render",f]]);export{i as default};
