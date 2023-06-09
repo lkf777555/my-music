@@ -1,9 +1,11 @@
 import { defineConfig } from "vite";
 import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
 import postCssPxToRem from "postcss-pxtorem";
 import VueMacros from "unplugin-vue-macros/vite";
 import Vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
   base: "./",
@@ -16,6 +18,10 @@ export default defineConfig({
     AutoImport({
       imports: ["vue", "vue-router", "pinia"], // 自动引入vue/vue-router/pinia相关函数
       dts: "src/auto-imports.d.ts", // 生成auto-imports.d.ts全局声明
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
     }),
   ],
   css: {
