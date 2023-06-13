@@ -37,7 +37,7 @@ export default defineConfig({
   server: {
     host: "localhost",
     open: true,
-    port: 3000,
+    port: 3001,
   },
   resolve: {
     alias: {

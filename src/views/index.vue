@@ -1,6 +1,8 @@
 <template>
-  <div>hello actions</div>
+  <div>全局方法注入</div>
 </template>
 
-<script setup></script>
+<script setup>
+let vm = inject("$vm");
+</script>
 <style lang="scss" scoped></style>

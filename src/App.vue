@@ -18,12 +18,26 @@ let {
   appContext: {
     app: {
       config: {
-        globalProperties: { MsgSuccess },
+        globalProperties: {
+          MsgSuccess,
+          MsgWarning,
+          MsgMessage,
+          MsgError,
+          $router,
+          $route,
+        },
       },
     },
   },
 } = getCurrentInstance();
 
-provide("$vm", { MsgSuccess });
+provide("$vm", {
+  MsgSuccess,
+  MsgWarning,
+  MsgMessage,
+  MsgError,
+  $router,
+  $route,
+});
 </script>
 <style scoped></style>
