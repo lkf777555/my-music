@@ -3,14 +3,16 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { startLoading, endLoading } from "./loading";
 
-const serve = axios.create({
-  baseURL: "",
+const Axios = axios.create({
+  baseURL: "http://localhost:3000",
   timeout: 30000,
 });
 
-serve.interceptors.request.use(
+Axios.interceptors.request.use(
   (config) => {
-    startLoading();
+    if (config.showLoading) {
+      startLoading();
+    }
     NProgress.start(); // 进度条开始
     return config;
   },
@@ -20,11 +22,11 @@ serve.interceptors.request.use(
   }
 );
 
-serve.interceptors.response.use(
+Axios.interceptors.response.use(
   (response) => {
     endLoading();
     NProgress.done(); // 进度条结束
-    return response;
+    return response.data.data;
   },
   (error) => {
     endLoading();
@@ -32,3 +34,5 @@ serve.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export default Axios;
