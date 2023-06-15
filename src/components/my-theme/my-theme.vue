@@ -1,14 +1,16 @@
 <template>
   <div>
     <el-switch
-      size="large"
       v-model="isDark"
-      style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+      inline-prompt
+      :active-icon="Moon"
+      :inactive-icon="Sunny"
     />
   </div>
 </template>
 
 <script setup name="MyTheme">
+import { Sunny, Moon } from "@element-plus/icons-vue";
 import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark();
