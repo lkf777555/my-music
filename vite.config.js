@@ -40,6 +40,7 @@ export default defineConfig({
     port: 3001,
   },
   resolve: {
+    extensions: [".vue", ".js", ".jsx", ".ts", ".tsx", ".json"],
     alias: {
       "@": resolve(__dirname, "src"),
       "@u": resolve(__dirname, "src/utils"),

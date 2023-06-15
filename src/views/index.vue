@@ -1,5 +1,7 @@
 <template>
-  <div>全局方法注入</div>
+  <div>
+    <my-theme></my-theme>
+  </div>
 </template>
 
 <script setup>
