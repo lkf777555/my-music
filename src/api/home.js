@@ -1,13 +1,12 @@
-import Axios from "@u/request";
+import request from "@u/request";
 /**
- * @method get 获取登录的key
- * @description
+ * @method get
+ * @description 获取登录的key
  * @param {}
  */
-export const login = () => {
-  return Axios({
+export const login = () =>
+  request({
     method: "get",
     url: "/login/qr/key",
-    showLoading: true,
+    showLoading: false,
   });
-};
