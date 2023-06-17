@@ -6,6 +6,9 @@ import Vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
+const INVALID_CHAR_REGEX = /[\u0000-\u001F"#$&*+,:;<=>?[\]^`{|}\u007F]/g;
+const DRIVE_LETTER_REGEX = /^[a-z]:/i;
+
 export default defineConfig({
   base: "./",
   plugins: [
@@ -37,6 +40,20 @@ export default defineConfig({
       "@a": resolve(__dirname, "src/api"),
       "@c": resolve(__dirname, "src/components"),
       "@s": resolve(__dirname, "src/store"),
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        sanitizeFileName(name) {
+          const match = DRIVE_LETTER_REGEX.exec(name);
+          const driveLetter = match ? match[0] : "";
+          return (
+            driveLetter +
+            name.slice(driveLetter.length).replace(INVALID_CHAR_REGEX, "")
+          );
+        },
+      },
     },
   },
 });
