@@ -17,32 +17,32 @@ let asideList = $ref([
   {
     title: "首页",
     link: "/",
-    url: "/home.png",
+    url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/home.png",
   },
   {
     title: "排行榜",
     link: "/rank",
-    url: "/rank.png",
+    url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/rank.png",
   },
   {
     title: "歌单",
     link: "/playlist",
-    url: "/playlist.png",
+    url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/playlist.png",
   },
   {
     title: "MV",
     link: "/mvlist",
-    url: "/mvlist.png",
+    url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/mvlist.png",
   },
   {
     title: "歌手",
     link: "/artist",
-    url: "/artist.png",
+    url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/artist.png",
   },
   {
     title: "我的",
     link: "/my",
-    url: "/my.png",
+    url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/my.png",
   },
 ]);
 </script>

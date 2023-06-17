@@ -1,7 +1,9 @@
 <template>
   <div class="page">
     <div class="logo flex a-c j-c">
-      <img src="/wymusic.png" alt="" />
+      <img
+        src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/wymusic.png"
+      />
       <div>网易云音乐</div>
     </div>
     <div class="list flex f-c a-c">

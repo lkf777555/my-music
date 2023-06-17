@@ -2,11 +2,15 @@
   <div class="page-header flex a-c j-b f-r">
     <div class="header-right flex a-c j-a">
       <my-theme></my-theme>
-      <img v-if="FullState" @click="toggleFullscreen" src="/fullscreen.png" />
+      <img
+        v-if="FullState"
+        @click="toggleFullscreen"
+        src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/fullscreen.png"
+      />
       <img
         v-if="!FullState"
         @click="toggleFullscreen"
-        src="/nofullscreen.png"
+        src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/nofullscreen.png"
       />
       <div class="avatar flex a-c j-c" @click="getLogin()">登录</div>
     </div>
