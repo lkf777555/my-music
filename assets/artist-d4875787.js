@@ -1,1 +1,0 @@
-import{_ as t}from"./_plugin-vue_export-helper-c27b6911.js";import{G as e,H as r}from"./index-af3eea90.js";const s={},c={class:"page"};function o(a,n){return e(),r("div",c,"artist")}const f=t(s,[["render",o]]);export{f as default};
