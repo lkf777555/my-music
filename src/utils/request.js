@@ -3,7 +3,10 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { startLoading, endLoading } from "./loading";
 
+NProgress.configure({ showSpinner: false });
+
 const errorCode = {
+  400: "参数错误",
   404: "访问资源不存在",
 };
 
@@ -35,7 +38,26 @@ service.interceptors.response.use(
       endLoading();
     }
     NProgress.done(); // 进度条结束
-    return response.data.data;
+
+    const code = response?.data.code;
+
+    const msg = errorCode[code];
+
+    if (
+      code !== 200 &&
+      code !== 800 &&
+      code !== 801 &&
+      code !== 802 &&
+      code !== 803
+    ) {
+      ElMessage({
+        showClose: true,
+        message: msg,
+        type: "error",
+      });
+    }
+
+    return response.data;
   },
   (error) => {
     if (error.config.showLoading) {

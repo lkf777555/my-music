@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import postCssPxToRem from "postcss-pxtorem";
 import VueMacros from "unplugin-vue-macros/vite";
 import Vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
@@ -24,16 +23,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
-  css: {
-    postcss: {
-      plugins: [
-        postCssPxToRem({
-          rootValue: 192,
-          propList: ["*"],
-        }),
-      ],
-    },
-  },
+  css: {},
   server: {
     host: "localhost",
     open: true,

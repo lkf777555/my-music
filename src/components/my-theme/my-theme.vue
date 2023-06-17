@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script setup name="MyTheme">
+<script setup>
 import { Sunny, Moon } from "@element-plus/icons-vue";
 import { useDark, useToggle } from "@vueuse/core";
 
