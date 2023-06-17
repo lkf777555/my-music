@@ -82,7 +82,7 @@ service.interceptors.response.use(
 );
 
 /**
- * 请求核心函数
+ * get参数转换
  * @param {Object} options 请求配置
  */
 function request(options) {
