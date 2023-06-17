@@ -3,12 +3,12 @@ import { createRouter, createWebHashHistory } from "vue-router";
 // 路由列表
 const routes = [
   {
-    path: "/index",
+    path: "/",
     name: "index",
     component: () => import("../views/index.vue"),
     children: [
       {
-        path: "/",
+        path: "/home",
         name: "home",
         component: () => import("../views/home.vue"),
       },
