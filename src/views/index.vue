@@ -17,45 +17,45 @@ let asideList = $ref([
   {
     title: "首页",
     link: "/",
-    url: "../../../public/home.png",
+    url: "/home.png",
   },
   {
     title: "排行榜",
     link: "/rank",
-    url: "../../../public/rank.png",
+    url: "/rank.png",
   },
   {
     title: "歌单",
     link: "/playlist",
-    url: "../../../public/playlist.png",
+    url: "/playlist.png",
   },
   {
     title: "MV",
     link: "/mvlist",
-    url: "../../../public/mvlist.png",
+    url: "/mvlist.png",
   },
   {
     title: "歌手",
     link: "/artist",
-    url: "../../../public/artist.png",
+    url: "/artist.png",
   },
   {
     title: "我的",
     link: "/my",
-    url: "../../../public/my.png",
+    url: "/my.png",
   },
 ]);
 </script>
 <style lang="scss" scoped>
-::v-deep.el-aside {
+:deep(.el-aside) {
   width: 240px;
   height: 100vh;
 }
-::v-deep.el-main {
+:deep(.el-main) {
   width: 100%;
   height: 100%;
 }
-::v-deep.el-header {
+:deep(.el-header) {
   padding: 0px;
 }
 .el-container {
@@ -75,6 +75,5 @@ let asideList = $ref([
       background-position: 0% 50%;
     }
   }
-  // background-color: var(--main-linear);
 }
 </style>

@@ -2,15 +2,11 @@
   <div class="page-header flex a-c j-b f-r">
     <div class="header-right flex a-c j-a">
       <my-theme></my-theme>
-      <img
-        v-if="FullState"
-        @click="toggleFullscreen"
-        src="../../../public/fullscreen.png"
-      />
+      <img v-if="FullState" @click="toggleFullscreen" src="/fullscreen.png" />
       <img
         v-if="!FullState"
         @click="toggleFullscreen"
-        src="../../../public/nofullscreen.png"
+        src="/nofullscreen.png"
       />
       <div class="avatar flex a-c j-c" @click="getLogin()">登录</div>
     </div>
@@ -130,7 +126,8 @@ watch(
     cursor: pointer;
   }
 }
-::v-deep .el-dialog__body {
+
+:deep(.el-dialog__body) {
   padding: 0px 20px 20px 20px;
 }
 </style>
