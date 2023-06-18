@@ -1,6 +1,9 @@
 <template>
   <div class="page">
-    <div class="logo flex a-c j-c">
+    <div
+      class="logo flex a-c j-c"
+      @click="vm.$router.push('/'), (activeIndex = 0)"
+    >
       <img
         src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/wymusic.png"
       />
@@ -42,13 +45,16 @@ const indexClick = (item, index) => {
 <style lang="scss" scoped>
 .logo {
   width: 100%;
-  height: 60px;
+  height: 80px;
+  cursor: pointer;
 
   img {
     width: 36px;
     height: 36px;
   }
+
   div {
+    font-weight: 100;
     margin: 0px 20px;
   }
 }
@@ -57,9 +63,10 @@ const indexClick = (item, index) => {
   height: 100%;
 
   .list-header {
-    width: 70%;
+    width: 80%;
     height: 50px;
     padding: 10px 12px;
+    cursor: pointer;
 
     img {
       width: 24px;
@@ -67,6 +74,7 @@ const indexClick = (item, index) => {
     }
     .title {
       margin-left: 10px;
+      font-weight: 100;
     }
   }
 }

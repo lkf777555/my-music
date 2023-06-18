@@ -1,9 +1,11 @@
 html.dark {
   /* 自定义深色背景颜色 */
   --main-color: #121212;
+  --main-card-color: #121212;
   --main-text-color: #00aeec;
 }
 :root {
-  --main-color: linear-gradient(to right, #a8edea, #e4efd2, #fed6e3, #dbdcdc);
+  --main-color: #f0f2f5;
+  --main-card-color: white;
   --main-text-color: #00aeec;
 }

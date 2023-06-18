@@ -37,3 +37,16 @@ export const loginCheck = (data) =>
     showLoading: false,
     data: data,
   });
+
+/**
+ * @method get
+ * @description banner轮播图
+ * @param {}
+ */
+export const getBannerList = (data) =>
+  request({
+    method: "get",
+    url: "/banner",
+    showLoading: false,
+    data: data,
+  });

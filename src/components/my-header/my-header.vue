@@ -42,7 +42,7 @@ let dialogVisible = $ref(false);
 let unikey = $ref("");
 let uniKeyImg = $ref("");
 let loginStatus = $ref(null);
-let loginCode = $ref("");
+
 // 请求接口并且轮询登录状态
 const getLogin = () => {
   loginKey().then((res) => {
@@ -53,14 +53,13 @@ const getLogin = () => {
     });
   });
   loginStatus = setInterval(() => {
-    if (loginCode == 803) {
-      clearInterval(loginStatus);
-      vm.MsgSuccess("登录成功");
-    }
     let time = new Date().getTime();
     loginCheck({ key: unikey, noCookie: true, timestamp: time }).then((res) => {
-      console.log(res);
-      loginCode = res.code;
+      if (res.code == 803) {
+        clearInterval(loginStatus);
+        dialogVisible = false;
+        vm.MsgSuccess("登录成功");
+      }
     });
   }, 1800);
 };

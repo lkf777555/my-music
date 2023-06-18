@@ -53,27 +53,16 @@ let asideList = $ref([
 }
 :deep(.el-main) {
   width: 100%;
-  height: 100%;
+  height: 92vh;
+  overflow: auto;
 }
 :deep(.el-header) {
   padding: 0px;
 }
 .el-container {
-  /* 渐变色动画 */
-  background: var(--main-color);
-  background-size: 200% auto;
-  animation: gradient 5s ease infinite;
-
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+  background-color: var(--main-color);
+}
+::-webkit-scrollbar {
+  display: none;
 }
 </style>
