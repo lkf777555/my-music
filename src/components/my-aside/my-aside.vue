@@ -79,6 +79,7 @@ const indexClick = (item, index) => {
   }
 }
 .active {
+  transition: all 0.3s linear;
   background-color: #ffffff;
   border-radius: 6px;
   color: var(--main-text-color);

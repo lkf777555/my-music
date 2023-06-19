@@ -46,6 +46,7 @@ const indexClick = (item, index) => {
   }
 }
 .active {
+  transition: all 0.3s linear;
   color: var(--main-text-color);
 }
 </style>
