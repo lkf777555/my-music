@@ -39,7 +39,7 @@ service.interceptors.response.use(
     }
     NProgress.done(); // 进度条结束
 
-    const code = response?.data.code;
+    const code = response?.data?.code;
 
     const msg = errorCode[code];
 

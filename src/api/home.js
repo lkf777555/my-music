@@ -21,7 +21,7 @@ export const loginImg = (data) =>
   request({
     method: "get",
     url: "/login/qr/create",
-    showLoading: false,
+    showLoading: true,
     data: data,
   });
 

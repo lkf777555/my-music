@@ -48,6 +48,7 @@ let asideList = $ref([
 </script>
 <style lang="scss" scoped>
 :deep(.el-aside) {
+  transition: all 0.3s linear;
   width: 240px;
   height: 100vh;
 }
@@ -64,5 +65,13 @@ let asideList = $ref([
 }
 ::-webkit-scrollbar {
   display: none;
+}
+@media screen and (max-width: 1366px) {
+  :deep(.el-aside) {
+    transition: all 0.3s linear;
+    width: 160px;
+    height: 100vh;
+    font-size: 12px;
+  }
 }
 </style>

@@ -44,8 +44,8 @@ let uniKeyImg = $ref("");
 let loginStatus = $ref(null);
 
 // 请求接口并且轮询登录状态
-const getLogin = () => {
-  loginKey().then((res) => {
+const getLogin = async () => {
+  await loginKey().then((res) => {
     unikey = res.data.unikey;
     loginImg({ key: unikey, qrimg: "qrimg" }).then((res) => {
       uniKeyImg = res.data.qrimg;
