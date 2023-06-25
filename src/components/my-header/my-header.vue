@@ -72,6 +72,8 @@ const toggleFullscreen = () => {
   FullState = screenfull.isFullscreen;
   if (screenfull.isEnabled) {
     screenfull.toggle();
+  } else {
+    vm.MsgError("您的浏览器不支持全屏,请更新到最新版本或者切换其他浏览器");
   }
 };
 // 对话框关闭停止轮询

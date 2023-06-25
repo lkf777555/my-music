@@ -16,7 +16,7 @@
 let asideList = $ref([
   {
     title: "首页",
-    link: "/",
+    link: "/home",
     url: "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/home.png",
   },
   {

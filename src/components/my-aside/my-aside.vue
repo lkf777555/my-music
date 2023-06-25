@@ -2,7 +2,7 @@
   <div class="page">
     <div
       class="logo flex a-c j-c"
-      @click="vm.$router.push('/'), (activeIndex = 0)"
+      @click="vm.$router.push('/'), (activeRoute = '/home')"
     >
       <img
         src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/wymusic.png"
@@ -14,11 +14,11 @@
         v-for="(item, index) in asideList"
         :key="index"
         :class="
-          activeIndex == index
+          activeRoute == item.link
             ? 'active list-header flex a-c'
             : 'list-header flex a-c'
         "
-        @click="indexClick(item, index)"
+        @click="indexClick(item)"
       >
         <img :src="item.url" />
         <div class="title">{{ item.title }}</div>
@@ -28,6 +28,7 @@
 </template>
 
 <script setup>
+let route = useRoute();
 const props = defineProps({
   asideList: {
     type: Array,
@@ -35,11 +36,11 @@ const props = defineProps({
   },
 });
 let vm = inject("$vm");
-let activeIndex = $ref("0");
 
-const indexClick = (item, index) => {
-  activeIndex = index;
-  vm.$router.push(item.link);
+let activeRoute = $computed(() => route.path);
+
+const indexClick = (item) => {
+  vm.$router.push({ path: item.link });
 };
 </script>
 <style lang="scss" scoped>
