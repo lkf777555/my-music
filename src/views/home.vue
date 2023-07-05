@@ -15,13 +15,13 @@
         <my-tab :list="tabList" @myClick="getVal"></my-tab>
       </div>
     </div>
-    <div class="new-disc">
-      <div class="disc-list">
+    <div class="recommend">
+      <div class="recom-list">
         <my-tab :list="tabList1" @myClick="getVal1"></my-tab>
       </div>
     </div>
-    <div class="new-mv">
-      <div class="mv-list">
+    <div class="recommend">
+      <div class="recom-list">
         <my-tab :list="tabList2" @myClick="getVal2"></my-tab>
       </div>
     </div>
@@ -37,7 +37,7 @@ let tabList = $ref({
   title: "热门推荐",
   children: [
     {
-      label: "为您推荐",
+      label: "推荐",
       value: "",
     },
     {
@@ -146,31 +146,6 @@ getBannerList().then((res) => {
   margin: 20px 0px;
   border-radius: 12px;
   .recom-list {
-    width: 100%;
-    height: 100%;
-    padding: 0px 20px;
-  }
-}
-.new-mv {
-  width: 100%;
-  height: 320px;
-  background-color: var(--main-card-color);
-  margin: 20px 0px;
-  border-radius: 12px;
-  .mv-list {
-    width: 100%;
-    height: 100%;
-    padding: 0px 20px;
-  }
-}
-
-.new-disc {
-  width: 100%;
-  height: 320px;
-  background-color: var(--main-card-color);
-  margin: 20px 0px;
-  border-radius: 12px;
-  .disc-list {
     width: 100%;
     height: 100%;
     padding: 0px 20px;

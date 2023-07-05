@@ -35,18 +35,36 @@ const indexClick = (item, index) => {
   width: 100%;
   height: 60px;
   .list-title {
-    padding-right: 50px;
-    font-size: 26px;
     font-weight: bold;
+    height: 60px;
+    line-height: 60px;
+    cursor: pointer;
   }
   .list-label {
-    padding-right: 50px;
+    width: 100px;
     font-weight: 100;
+    height: 60px;
+    line-height: 60px;
     cursor: pointer;
   }
 }
 .active {
   transition: all 0.3s linear;
   color: var(--main-text-color);
+}
+@media screen and (max-width: 1366px) {
+  .list-label {
+    font-size: 12px;
+  }
+  .list-title {
+    width: 130px;
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 1366px) {
+  .list-title {
+    width: 140px;
+    font-size: 26px;
+  }
 }
 </style>
