@@ -1,7 +1,6 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import { startLoading, endLoading } from "./loading";
 
 NProgress.configure({ showSpinner: false });
 
@@ -17,16 +16,10 @@ const service = axios.create({
 //请求拦截器
 service.interceptors.request.use(
   (config) => {
-    if (config.showLoading) {
-      startLoading();
-    }
     NProgress.start(); // 进度条开始
     return config;
   },
   (error) => {
-    if (error.config.showLoading) {
-      endLoading();
-    }
     NProgress.done(); // 进度条结束
     return Promise.reject(error);
   }
@@ -34,22 +27,13 @@ service.interceptors.request.use(
 //响应拦截器
 service.interceptors.response.use(
   (response) => {
-    if (response.config.showLoading) {
-      endLoading();
-    }
     NProgress.done(); // 进度条结束
 
     const code = response?.data?.code;
 
     const msg = errorCode[code];
 
-    if (
-      code !== 200 &&
-      code !== 800 &&
-      code !== 801 &&
-      code !== 802 &&
-      code !== 803
-    ) {
+    if (code !== 200) {
       ElMessage({
         showClose: true,
         message: msg,
@@ -60,9 +44,6 @@ service.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    if (error.config.showLoading) {
-      endLoading();
-    }
     NProgress.done(); // 进度条结束
 
     const code = error.response?.data?.code;

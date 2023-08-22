@@ -1,4 +1,4 @@
-import request from "@u/request";
+import request from "../utils/request";
 
 /**
  * @method get
@@ -9,7 +9,6 @@ export const loginKey = () =>
   request({
     method: "get",
     url: "/login/qr/key",
-    showLoading: false,
   });
 
 /**
@@ -21,7 +20,6 @@ export const loginImg = (data) =>
   request({
     method: "get",
     url: "/login/qr/create",
-    showLoading: true,
     data: data,
   });
 
@@ -34,7 +32,6 @@ export const loginCheck = (data) =>
   request({
     method: "get",
     url: "/login/qr/check",
-    showLoading: false,
     data: data,
   });
 
@@ -47,6 +44,5 @@ export const getBannerList = (data) =>
   request({
     method: "get",
     url: "/banner",
-    showLoading: false,
     data: data,
   });

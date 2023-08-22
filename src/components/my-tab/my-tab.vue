@@ -1,5 +1,5 @@
 <template>
-  <div class="tab">
+  <div>
     <div class="tab-list flex a-c">
       <div class="list-title">{{ list.title }}</div>
       <div
@@ -35,6 +35,7 @@ const indexClick = (item, index) => {
   width: 100%;
   height: 60px;
   .list-title {
+    width: 100px;
     font-weight: bold;
     height: 60px;
     line-height: 60px;
@@ -50,21 +51,6 @@ const indexClick = (item, index) => {
 }
 .active {
   transition: all 0.3s linear;
-  color: var(--main-text-color);
-}
-@media screen and (max-width: 1366px) {
-  .list-label {
-    font-size: 12px;
-  }
-  .list-title {
-    width: 130px;
-    font-size: 18px;
-  }
-}
-@media screen and (min-width: 1366px) {
-  .list-title {
-    width: 140px;
-    font-size: 26px;
-  }
+  color: #00aeec;
 }
 </style>

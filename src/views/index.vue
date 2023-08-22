@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div class="common-layout">
+    <el-container>
+      <el-aside><my-aside :asideList="asideList"></my-aside></el-aside>
       <el-container>
-        <el-aside><my-aside :asideList="asideList"></my-aside></el-aside>
-        <el-container>
-          <el-header><my-header></my-header></el-header>
-          <el-main><router-view></router-view></el-main>
-        </el-container>
+        <el-main><router-view></router-view></el-main>
       </el-container>
-    </div>
+    </el-container>
+    <my-login></my-login>
   </div>
 </template>
 
@@ -61,17 +59,9 @@ let asideList = $ref([
   padding: 0px;
 }
 .el-container {
-  background-color: var(--main-color);
+  background-color: #f0f2f5;
 }
 ::-webkit-scrollbar {
   display: none;
-}
-@media screen and (max-width: 1366px) {
-  :deep(.el-aside) {
-    transition: all 0.3s linear;
-    width: 160px;
-    height: 100vh;
-    font-size: 12px;
-  }
 }
 </style>

@@ -1,10 +1,9 @@
-import MyTheme from "@c/my-theme";
-import MyHeader from "@c/my-MyHeader";
+import MyLogin from "@c/my-MyLogin";
 import MyAside from "@c/my-MyAside";
 import MySwiper from "@c/my-swiper";
 import MyTab from "@c/my-tab";
 
-export const components = [MyTheme, MyHeader, MyAside, MySwiper, MyTab];
+export const components = [MyLogin, MyAside, MySwiper, MyTab];
 
 export default {
   install: function (app) {
