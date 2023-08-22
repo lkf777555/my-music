@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="banner">
+    <div>
       <el-skeleton :loading="loading" :animated="true">
         <template #default><my-swiper :list="swiperList"></my-swiper></template>
         <template #template>
@@ -136,14 +136,10 @@ getBannerList().then((res) => {
 });
 </script>
 <style lang="scss" scoped>
-.banner {
-  padding: 0px 0px 20px 0px;
-}
 .recommend {
   width: 100%;
   height: 320px;
-  background-color: var(--main-card-color);
-  margin: 20px 0px;
+  margin: 10px 0px;
   border-radius: 12px;
   .recom-list {
     width: 100%;

@@ -52,8 +52,10 @@ let asideList = $ref([
 }
 :deep(.el-main) {
   width: 100%;
-  height: 92vh;
+  height: 100vh;
   overflow: auto;
+  padding: 0px;
+  background-color: white;
 }
 :deep(.el-header) {
   padding: 0px;

@@ -8,13 +8,9 @@
       :close-on-click-modal="false"
       :close-on-press-escape="false"
     >
-      <div class="login-box flex f-c a-c j-a">
+      <div class="login-box flex f-c a-c j-a" v-loading="loading">
         <div class="img-border flex a-c j-c"><img :src="uniKeyImg" /></div>
-        <div>
-          使用
-          <span @click="pushWy">网易云音乐APP</span>
-          扫码登录
-        </div>
+        <div>使用<span @click="pushWy">网易云音乐APP</span> 扫码登录</div>
       </div>
     </el-dialog>
   </div>
@@ -28,6 +24,9 @@ let dialogVisible = $ref(false);
 let unikey = $ref("");
 let uniKeyImg = $ref("");
 let loginStatus = $ref(null);
+let loading = $ref(true);
+
+// https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/Refresh.png
 
 // 请求接口并且轮询登录状态
 const getLogin = () => {
@@ -35,6 +34,7 @@ const getLogin = () => {
     unikey = res.data.unikey;
     loginImg({ key: unikey, qrimg: "qrimg" }).then((res) => {
       uniKeyImg = res.data.qrimg;
+      loading = false;
       getIntval();
     });
   });
@@ -50,7 +50,7 @@ const getIntval = () => {
         vm.MsgSuccess("登录成功");
       }
     });
-  }, 1800);
+  }, 2500);
 };
 
 // 跳转网易云APP下载
