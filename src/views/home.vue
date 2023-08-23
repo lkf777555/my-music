@@ -12,17 +12,17 @@
     </div>
     <div class="recommend">
       <div class="recom-list">
-        <my-tab :list="tabList" @myClick="getVal"></my-tab>
+        <my-tab :list="tabList" :skLoading="true" @myClick="getVal"></my-tab>
       </div>
     </div>
     <div class="recommend">
       <div class="recom-list">
-        <my-tab :list="tabList1" @myClick="getVal1"></my-tab>
+        <my-tab :list="tabList1" :skLoading="true" @myClick="getVal1"></my-tab>
       </div>
     </div>
     <div class="recommend">
       <div class="recom-list">
-        <my-tab :list="tabList2" @myClick="getVal2"></my-tab>
+        <my-tab :list="tabList2" :skLoading="true" @myClick="getVal2"></my-tab>
       </div>
     </div>
   </div>

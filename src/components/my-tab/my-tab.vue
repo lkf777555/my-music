@@ -10,6 +10,30 @@
         {{ item.label }}
       </div>
     </div>
+    <el-skeleton :loading="skLoading" :animated="true">
+      <template #default>内容</template>
+      <template #template>
+        <div class="flex j-b">
+          <div v-for="i in 6">
+            <div>
+              <el-skeleton-item
+                variant="p"
+                style="width: 220px; height: 200px"
+              />
+            </div>
+            <div style="margin-top: 10px">
+              <el-skeleton-item
+                variant="p"
+                style="width: 220px; height: 20px"
+              />
+            </div>
+            <div style="margin-top: 10px">
+              <el-skeleton-item variant="p" style="width: 60px; height: 20px" />
+            </div>
+          </div>
+        </div>
+      </template>
+    </el-skeleton>
   </div>
 </template>
 
@@ -18,6 +42,10 @@ const props = defineProps({
   list: {
     type: Object,
     default: () => {},
+  },
+  skLoading: {
+    type: Boolean,
+    default: true,
   },
 });
 
