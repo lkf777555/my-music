@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vueexport-helper-c27b6911.js";import{B as t,C as s}from"./index-dcbb1959.js";const c={},o={class:"page"};function r(n,_){return t(),s("div",o,"mvlist")}const m=e(c,[["render",r]]);export{m as default};
