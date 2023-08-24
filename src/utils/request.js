@@ -7,12 +7,14 @@ NProgress.configure({ showSpinner: false });
 const errorCode = {
   400: "参数错误",
   404: "访问资源不存在",
+  800: "二维码已过期",
 };
 
 const service = axios.create({
   baseURL: "https://api.trtst.com/",
   timeout: 30000,
 });
+
 //请求拦截器
 service.interceptors.request.use(
   (config) => {
@@ -24,6 +26,7 @@ service.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
 //响应拦截器
 service.interceptors.response.use(
   (response) => {
@@ -31,12 +34,10 @@ service.interceptors.response.use(
 
     const code = response?.data?.code;
 
-    const msg = errorCode[code];
-
-    if (code !== 200) {
+    if (errorCode.hasOwnProperty(code)) {
       ElMessage({
         showClose: true,
-        message: msg,
+        message: errorCode[code],
         type: "error",
       });
     }
@@ -46,19 +47,17 @@ service.interceptors.response.use(
   (error) => {
     NProgress.done(); // 进度条结束
 
-    const code = error.response?.data?.code;
+    const code = error?.response?.status;
 
-    const msg = errorCode[code];
-
-    if (code) {
+    if (errorCode.hasOwnProperty(code)) {
       ElMessage({
         showClose: true,
-        message: msg,
+        message: errorCode[code],
         type: "error",
       });
     }
 
-    return Promise.reject(error);
+    return Promise.reject(error.message);
   }
 );
 

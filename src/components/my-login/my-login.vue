@@ -50,7 +50,7 @@ const getIntval = () => {
         vm.MsgSuccess("登录成功");
       }
     });
-  }, 2500);
+  }, 2000);
 };
 
 // 跳转网易云APP下载

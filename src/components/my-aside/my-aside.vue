@@ -80,7 +80,7 @@ const indexClick = (item) => {
   }
 }
 .active {
-  transition: all 0.3s linear;
+  transition: all 0.3s ease;
   background-color: #ffffff;
   border-radius: 6px;
   color: #00aeec;
