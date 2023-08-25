@@ -46,3 +46,15 @@ export const getBannerList = (data) =>
     url: "/banner",
     data: data,
   });
+
+/**
+ * @method get
+ * @description 首页热门推荐
+ * @param {}
+ */
+export const getopPlayList = (data) =>
+  request({
+    method: "get",
+    url: "/top/playlist",
+    data: data,
+  });

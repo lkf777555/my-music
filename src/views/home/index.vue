@@ -12,27 +12,42 @@
     </div>
     <div class="recommend">
       <div class="recom-list">
-        <my-tab :list="tabList" :skLoading="true" @myClick="getVal"></my-tab>
+        <my-tab
+          :list="tabList"
+          :skLoading="skLoading"
+          @myClick="getVal"
+        ></my-tab>
       </div>
     </div>
     <div class="recommend">
       <div class="recom-list">
-        <my-tab :list="tabList1" :skLoading="true" @myClick="getVal1"></my-tab>
+        <my-tab
+          :list="tabList1"
+          :skLoading="skLoading1"
+          @myClick="getVal1"
+        ></my-tab>
       </div>
     </div>
     <div class="recommend">
       <div class="recom-list">
-        <my-tab :list="tabList2" :skLoading="true" @myClick="getVal2"></my-tab>
+        <my-tab
+          :list="tabList2"
+          :skLoading="skLoading2"
+          @myClick="getVal2"
+        ></my-tab>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { getBannerList } from "@a/home";
+import { getBannerList, getopPlayList } from "@a/home";
 
 let swiperList = $ref([]);
 let loading = $ref(true);
+let skLoading = $ref(true);
+let skLoading1 = $ref(true);
+let skLoading2 = $ref(true);
 let tabList = $ref({
   title: "热门推荐",
   children: [
@@ -118,7 +133,7 @@ let tabList2 = $ref({
 });
 
 const getVal = (val, inx) => {
-  console.log(val, inx);
+  getList(val);
 };
 
 const getVal1 = (val, inx) => {
@@ -134,6 +149,14 @@ getBannerList().then((res) => {
   swiperList = res.banners;
   loading = false;
 });
+
+const getList = (value = "") => {
+  let data = { limit: 6, order: "hot", cat: value, offset: 0 };
+  getopPlayList(data).then((res) => {
+    skLoading = false;
+  });
+};
+getList();
 </script>
 <style lang="scss" scoped>
 .recommend {
@@ -141,6 +164,7 @@ getBannerList().then((res) => {
   height: 320px;
   margin: 10px 0px;
   border-radius: 12px;
+
   .recom-list {
     width: 100%;
     height: 100%;

@@ -54,7 +54,7 @@ const emit = defineEmits(["myClick"]);
 let activeIndex = $ref("0");
 
 const indexClick = (item, index) => {
-  emit("myClick", item, index);
+  emit("myClick", item.value, index);
   activeIndex = index;
 };
 </script>
