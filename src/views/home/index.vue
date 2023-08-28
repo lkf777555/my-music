@@ -10,7 +10,7 @@
         </template>
       </el-skeleton>
     </div>
-    <div class="recommend" v-if="!skLoading">
+    <div class="recommend">
       <div class="recom-list">
         <my-tab
           :list="tab"
@@ -173,7 +173,7 @@ getList();
 <style lang="scss" scoped>
 .recommend {
   width: 100%;
-  height: 360px;
+  height: 100%;
   margin: 20px 0px;
   border-radius: 12px;
   background-color: white;
