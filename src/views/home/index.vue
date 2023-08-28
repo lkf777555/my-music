@@ -16,6 +16,7 @@
           :list="tab"
           :skLoading="skLoading"
           :tdata="tdata"
+          :Mtype="1"
           @myClick="getVal"
         ></my-tab>
       </div>
@@ -26,6 +27,7 @@
           :list="tab1"
           :skLoading="skLoading1"
           :tdata="tdata1"
+          :Mtype="2"
           @myClick="getVal1"
         ></my-tab>
       </div>
@@ -36,6 +38,7 @@
           :list="tab2"
           :skLoading="skLoading2"
           :tdata="tdata2"
+          :Mtype="3"
           @myClick="getVal2"
         ></my-tab>
       </div>

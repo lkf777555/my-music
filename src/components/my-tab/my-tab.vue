@@ -10,7 +10,7 @@
         {{ item.label }}
       </div>
     </div>
-    <el-skeleton :loading="skLoading" :animated="true">
+    <el-skeleton :loading="skLoading" :animated="true" v-if="Mtype == 1">
       <template #default>
         <div class="flex j-b">
           <div v-for="(item, index) in tdata" :key="index" style="width: 220px">
@@ -53,15 +53,19 @@
 const props = defineProps({
   list: {
     type: Object,
-    default: () => {},
+    default: () => {}, //tab数据
   },
   skLoading: {
     type: Boolean,
-    default: true,
+    default: true, //是否开启骨架屏
   },
   tdata: {
     type: Array,
-    default: () => [],
+    default: () => [], //列表数据
+  },
+  Mtype: {
+    type: Number,
+    default: 1, //组件类型
   },
 });
 
@@ -78,6 +82,7 @@ const indexClick = (item, index) => {
 .tab-list {
   width: 100%;
   height: 60px;
+
   .list-title {
     width: 100px;
     font-weight: bold;
@@ -85,6 +90,7 @@ const indexClick = (item, index) => {
     line-height: 60px;
     cursor: pointer;
   }
+
   .list-label {
     width: 100px;
     font-weight: 100;
@@ -93,6 +99,7 @@ const indexClick = (item, index) => {
     cursor: pointer;
   }
 }
+
 .active {
   transition: all 0.3s linear;
   color: #00aeec;
