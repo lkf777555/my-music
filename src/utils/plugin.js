@@ -22,5 +22,14 @@ export default {
     app.config.globalProperties.MsgError = function (msg) {
       ElMessage.error(`${msg}`);
     };
+    app.config.globalProperties.formartNum = function (value) {
+      let num = 0;
+      if (value > 9999) {
+        num = Math.round((value / 10000) * 10) / 10 + "万";
+      } else {
+        num = value;
+      }
+      return num;
+    };
   },
 };

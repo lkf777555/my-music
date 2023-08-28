@@ -55,7 +55,6 @@ let asideList = $ref([
   height: 100vh;
   overflow: auto;
   padding: 0px;
-  background-color: white;
 }
 :deep(.el-header) {
   padding: 0px;

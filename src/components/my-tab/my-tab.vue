@@ -11,14 +11,26 @@
       </div>
     </div>
     <el-skeleton :loading="skLoading" :animated="true">
-      <template #default>内容</template>
+      <template #default>
+        <div class="flex j-b">
+          <div v-for="(item, index) in tdata" :key="index" style="width: 220px">
+            <img class="music-img" :src="item.coverImgUrl" />
+            <div class="music-title">{{ item.name }}</div>
+            <div v-if="item.tags" style="padding-top: 4px">
+              <span class="music-tag" v-for="(inm, inx) in item.tags" :key="inx"
+                >#{{ inm }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </template>
       <template #template>
         <div class="flex j-b">
           <div v-for="i in 6">
             <div>
               <el-skeleton-item
                 variant="p"
-                style="width: 220px; height: 200px"
+                style="width: 220px; height: 220px"
               />
             </div>
             <div style="margin-top: 10px">
@@ -46,6 +58,10 @@ const props = defineProps({
   skLoading: {
     type: Boolean,
     default: true,
+  },
+  tdata: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -80,5 +96,33 @@ const indexClick = (item, index) => {
 .active {
   transition: all 0.3s linear;
   color: #00aeec;
+}
+
+.music-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.music-title {
+  height: 40px;
+  padding-top: 4px;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.music-tag {
+  padding-right: 5px;
+  font-size: 12px;
+  font-weight: 100;
+  color: #ea3e3c;
 }
 </style>
