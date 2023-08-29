@@ -11,11 +11,19 @@
     <el-skeleton :loading="skLoading" :animated="true" v-if="Mtype == 1">
       <template #default>
         <div class="flex j-b">
-          <div v-for="(item, index) in tdata" :key="index" style="width: 220px">
+          <div v-for="(item, index) in tdata" :key="index" style="width: 220px; position: relative">
             <img class="music-img" :src="item.coverImgUrl" />
             <div class="music-title">{{ item.name }}</div>
             <div v-if="item.tags" style="padding: 2px 0px 10px 0px">
               <span class="music-tag" v-for="(inm, inx) in item.tags" :key="inx">#{{ inm }}</span>
+            </div>
+            <div class="music-position flex a-c">
+              <img src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/headset.png" />
+              <div>
+                {{ formartNum(item.playCount) }}
+              </div>
+              <div>/</div>
+              <div>{{ item.trackCount }}首</div>
             </div>
           </div>
         </div>
@@ -156,5 +164,29 @@ const indexClick = (item, index) => {
   font-size: 12px;
   font-weight: 100;
   color: #ea3e3c;
+}
+
+.music-position {
+  height: 30px;
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.5) 97%,
+      rgba(0, 0, 0, 0.5) 100%);
+  border-radius: 8px 8px 0px 8px;
+
+  img {
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+  }
+
+  >div {
+    margin-right: 4px;
+  }
 }
 </style>
