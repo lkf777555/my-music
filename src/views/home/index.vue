@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { getBannerList, getopPlayList } from "@a/home";
+import { getBannerList, getopPlayList, getopAlbumList } from "@a/home";
 
 let swiperList = $ref([]),
   loading = $ref(true),
@@ -148,7 +148,7 @@ const getVal = (val, inx) => {
 };
 
 const getVal1 = (val, inx) => {
-  console.log(val, inx);
+  getList1(val);
 };
 
 const getVal2 = (val, inx) => {
@@ -169,6 +169,22 @@ const getList = (value = "") => {
   });
 };
 getList();
+
+const getList1 = (value = "") => {
+  let data = {
+    limit: 12,
+    offset: 0,
+    area: value,
+    type: "new",
+    year: "",
+    month: "",
+  };
+  getopAlbumList(data).then((res) => {
+    skLoading1 = false;
+    tdata1 = res.monthData;
+  });
+};
+getList1();
 </script>
 <style lang="scss" scoped>
 .recommend {
@@ -177,6 +193,7 @@ getList();
   margin: 20px 0px;
   border-radius: 12px;
   background-color: white;
+
   .recom-list {
     width: 100%;
     height: 100%;

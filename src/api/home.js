@@ -58,3 +58,15 @@ export const getopPlayList = (data) =>
     url: "/top/playlist",
     data: data,
   });
+
+/**
+ * @method get
+ * @description 首页热碟上架
+ * @param {}
+ */
+export const getopAlbumList = (data) =>
+  request({
+    method: "get",
+    url: "/top/album",
+    data: data,
+  });
