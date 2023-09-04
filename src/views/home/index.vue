@@ -1,14 +1,7 @@
 <template>
-  <div class="page">
+  <div>
     <div>
-      <el-skeleton :loading="loading" :animated="true">
-        <template #default><my-swiper :list="swiperList"></my-swiper></template>
-        <template #template>
-          <el-skeleton-item variant="p" style="width: 27%; height: 200px" />
-          <el-skeleton-item variant="p" style="width: 46%; height: 200px" />
-          <el-skeleton-item variant="p" style="width: 27%; height: 200px" />
-        </template>
-      </el-skeleton>
+      <my-swiper :list="swiperList" :vloading="loading" />
     </div>
     <div class="recommend">
       <div class="recom-list">
@@ -47,7 +40,12 @@
 </template>
 
 <script setup>
-import { getBannerList, getopPlayList, getopAlbumList } from "@a/home";
+import {
+  getBannerList,
+  getopPlayList,
+  getopAlbumList,
+  getopMVList,
+} from "@a/home";
 
 let swiperList = $ref([]),
   loading = $ref(true),
@@ -152,7 +150,7 @@ const getVal1 = (val, inx) => {
 };
 
 const getVal2 = (val, inx) => {
-  console.log(val, inx);
+  getList2(val);
 };
 
 //获取banner轮播图数据
@@ -161,6 +159,7 @@ getBannerList().then((res) => {
   loading = false;
 });
 
+// 获取热门推荐
 const getList = (value = "") => {
   let data = { limit: 6, order: "hot", cat: value, offset: 0 };
   getopPlayList(data).then((res) => {
@@ -170,6 +169,7 @@ const getList = (value = "") => {
 };
 getList();
 
+// 获取新碟上架
 const getList1 = (value = "") => {
   let data = {
     limit: 12,
@@ -185,6 +185,22 @@ const getList1 = (value = "") => {
   });
 };
 getList1();
+
+//获取mv列表
+const getList2 = (value = "") => {
+  let data = {
+    limit: 10,
+    offset: 0,
+    area: value,
+    type: "",
+    order: "",
+  };
+  getopMVList(data).then((res) => {
+    skLoading2 = false;
+    tdata2 = res.data;
+  });
+};
+getList2();
 </script>
 <style lang="scss" scoped>
 .recommend {

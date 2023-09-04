@@ -70,3 +70,15 @@ export const getopAlbumList = (data) =>
     url: "/top/album",
     data: data,
   });
+
+/**
+ * @method get
+ * @description 首页热碟上架
+ * @param {}
+ */
+export const getopMVList = (data) =>
+  request({
+    method: "get",
+    url: "/mv/all",
+    data: data,
+  });
