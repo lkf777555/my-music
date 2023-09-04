@@ -40,6 +40,7 @@ export default defineConfig({
       "@a": resolve(__dirname, "src/api"),
       "@c": resolve(__dirname, "src/components"),
       "@s": resolve(__dirname, "src/store"),
+      "@h": resolve(__dirname, "src/hooks"),
     },
   },
   build: {
