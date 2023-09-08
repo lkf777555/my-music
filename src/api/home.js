@@ -6,10 +6,10 @@ import request from "../utils/request";
  * @param {}
  */
 export const loginKey = () =>
-  request({
-    method: "get",
-    url: "/login/qr/key",
-  });
+    request({
+        method: "get",
+        url: "/login/qr/key",
+    });
 
 /**
  * @method get
@@ -17,11 +17,11 @@ export const loginKey = () =>
  * @param {}
  */
 export const loginImg = (data) =>
-  request({
-    method: "get",
-    url: "/login/qr/create",
-    data: data,
-  });
+    request({
+        method: "get",
+        url: "/login/qr/create",
+        data: data,
+    });
 
 /**
  * @method get
@@ -29,11 +29,11 @@ export const loginImg = (data) =>
  * @param {}
  */
 export const loginCheck = (data) =>
-  request({
-    method: "get",
-    url: "/login/qr/check",
-    data: data,
-  });
+    request({
+        method: "get",
+        url: "/login/qr/check",
+        data: data,
+    });
 
 /**
  * @method get
@@ -41,11 +41,11 @@ export const loginCheck = (data) =>
  * @param {}
  */
 export const getBannerList = (data) =>
-  request({
-    method: "get",
-    url: "/banner",
-    data: data,
-  });
+    request({
+        method: "get",
+        url: "/banner",
+        data: data,
+    });
 
 /**
  * @method get
@@ -53,11 +53,11 @@ export const getBannerList = (data) =>
  * @param {}
  */
 export const getopPlayList = (data) =>
-  request({
-    method: "get",
-    url: "/top/playlist",
-    data: data,
-  });
+    request({
+        method: "get",
+        url: "/top/playlist",
+        data: data,
+    });
 
 /**
  * @method get
@@ -65,11 +65,11 @@ export const getopPlayList = (data) =>
  * @param {}
  */
 export const getopAlbumList = (data) =>
-  request({
-    method: "get",
-    url: "/top/album",
-    data: data,
-  });
+    request({
+        method: "get",
+        url: "/top/album",
+        data: data,
+    });
 
 /**
  * @method get
@@ -77,8 +77,8 @@ export const getopAlbumList = (data) =>
  * @param {}
  */
 export const getopMVList = (data) =>
-  request({
-    method: "get",
-    url: "/mv/all",
-    data: data,
-  });
+    request({
+        method: "get",
+        url: "/mv/all",
+        data: data,
+    });

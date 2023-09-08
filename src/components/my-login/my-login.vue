@@ -13,7 +13,7 @@
         >
             <div class="login-box flex f-c a-c j-a" v-loading="loading">
                 <div class="img-border flex a-c j-c"><img :src="uniKeyImg" /></div>
-                <div>使用<span @click="pushWy">网易云音乐APP</span> 扫码登录</div>
+                <div>使用<span @click="pushWy">网易云音乐APP</span> 扫码授权登录</div>
             </div>
         </el-dialog>
     </div>
@@ -21,6 +21,7 @@
 
 <script setup>
 import { loginKey, loginImg, loginCheck } from "@a/home";
+import { userAccount } from "@a/user";
 
 let vm = inject("$vm");
 let dialogVisible = $ref(true);
@@ -46,6 +47,12 @@ const getQrimg = async () => {
     getIntval();
 };
 
+// 获取账号信息
+const getAccountInfo = async () => {
+    let { profile } = await userAccount({ cookie: vm.cookie });
+    vm.useLoginInfoPinia.userInfo = profile;
+};
+
 // 轮询登录状态
 const getIntval = () => {
     loginStatus = setInterval(() => {
@@ -53,12 +60,13 @@ const getIntval = () => {
         loginCheck(data).then((res) => {
             if (res.code == 803) {
                 clearInterval(loginStatus);
-                dialogVisible = false;
+                vm.MsgSuccess("授权成功");
                 vm.useLoginInfoPinia.isDialogState = false; //关闭全局登录对话框
                 vm.useLoginInfoPinia.userCookie = res.cookie; //存储cookie
                 vm.useLoginInfoPinia.isLoginState = true; //存储登录状态
                 vm.useLoginInfoPinia.userTimestamp = new Date().getTime(); //登录成功的时间戳
-                vm.MsgSuccess("登录成功");
+                getAccountInfo(); //授权成功后用cookie换取用户账号信息
+                dialogVisible = false;
             }
         });
     }, 2000);
