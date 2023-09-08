@@ -6,7 +6,6 @@
         <el-main><router-view></router-view></el-main>
       </el-container>
     </el-container>
-    <my-login></my-login>
   </div>
 </template>
 

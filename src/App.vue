@@ -1,43 +1,34 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+    <div>
+        <router-view></router-view>
+        <my-login v-if="useLoginInfoPinia.isDialogState"></my-login>
+    </div>
 </template>
 <script setup>
-// // 禁止右键
-// document.oncontextmenu = new Function("event.returnValue=false");
-// // 禁用选择
-// document.onselectstart = new Function("event.returnValue=false");
-// //禁止f12
-// document.onkeydown = new Function("event.returnValue=false");
+import { useLoginInfo } from "@s/user";
+const useLoginInfoPinia = useLoginInfo(); //用户登录信息
 
 /*
  *全局挂载方法和使用
  */
 let {
-  appContext: {
-    app: {
-      config: {
-        globalProperties: {
-          MsgSuccess,
-          MsgWarning,
-          MsgMessage,
-          MsgError,
-          $router,
-          $route,
+    appContext: {
+        app: {
+            config: {
+                globalProperties: { MsgSuccess, MsgWarning, MsgMessage, MsgError, $router, $route },
+            },
         },
-      },
     },
-  },
 } = getCurrentInstance();
 
 provide("$vm", {
-  MsgSuccess,
-  MsgWarning,
-  MsgMessage,
-  MsgError,
-  $router,
-  $route,
+    MsgSuccess,
+    MsgWarning,
+    MsgMessage,
+    MsgError,
+    $router,
+    $route,
+    useLoginInfoPinia,
 });
 </script>
 <style scoped></style>
