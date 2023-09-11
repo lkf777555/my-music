@@ -10,6 +10,7 @@
             :close-on-press-escape="false"
             :align-center="true"
             style="border-radius: 8px"
+            @close="dialogClose"
         >
             <div class="login-box flex f-c a-c j-a" v-loading="loading">
                 <div class="img-border flex a-c j-c"><img :src="uniKeyImg" /></div>
@@ -56,6 +57,9 @@ const getAccountInfo = async () => {
 // 轮询登录状态
 const getIntval = () => {
     loginStatus = setInterval(() => {
+        if (!dialogVisible) {
+            clearInterval(loginStatus);
+        }
         let data = { key: unikey, noCookie: true, timestamp: new Date().getTime() };
         loginCheck(data).then((res) => {
             if (res.code == 803) {
@@ -63,8 +67,8 @@ const getIntval = () => {
                 vm.MsgSuccess("授权成功");
                 vm.useLoginInfoPinia.$patch({
                     isDialogState: false, //关闭全局登录对话框
-                    userCookie: res.cookie, //存储cookie
                     isLoginState: true, //存储登录状态
+                    userCookie: res.cookie, //存储cookie
                     userTimestamp: new Date().getTime(), //登录成功的时间戳
                 });
                 getAccountInfo(); //授权成功后用cookie换取用户账号信息
@@ -84,16 +88,11 @@ const pushWy = () => {
     window.open("https://music.163.com/#/download", '"_blank"');
 };
 
-// 对话框关闭停止轮询
-watch(
-    () => dialogVisible,
-    (val) => {
-        if (val == false) {
-            clearInterval(loginStatus);
-        }
-    },
-    { immediate: true }
-);
+// 关闭对话框
+const dialogClose = () => {
+    vm.useLoginInfoPinia.isDialogState = false;
+    dialogVisible = false;
+};
 </script>
 
 <style lang="scss" scoped>

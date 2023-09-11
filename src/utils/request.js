@@ -1,8 +1,4 @@
 import axios from "axios";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-
-NProgress.configure({ showSpinner: false });
 
 const errorCode = {
     400: "参数错误",
@@ -18,11 +14,9 @@ const service = axios.create({
 //请求拦截器
 service.interceptors.request.use(
     (config) => {
-        NProgress.start(); // 进度条开始
         return config;
     },
     (error) => {
-        NProgress.done(); // 进度条结束
         return Promise.reject(error);
     }
 );
@@ -30,8 +24,6 @@ service.interceptors.request.use(
 //响应拦截器
 service.interceptors.response.use(
     (response) => {
-        NProgress.done(); // 进度条结束
-
         const code = response?.data?.code;
 
         if (errorCode.hasOwnProperty(code)) {
@@ -46,8 +38,6 @@ service.interceptors.response.use(
         return response.data;
     },
     (error) => {
-        NProgress.done(); // 进度条结束
-
         const code = error?.response?.status;
 
         if (errorCode.hasOwnProperty(code)) {

@@ -12,11 +12,9 @@
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.6",
-    "nprogress": "^0.2.0",
     "pinia": "^2.1.3",
     "pinia-plugin-persist": "^1.0.0",
     "sass": "^1.63.2",
-    "screenfull": "^6.0.2",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2"
   },
