@@ -6,10 +6,8 @@
 </template>
 <script setup>
 import { useLoginInfo } from "@s/user";
-import { CookieParams } from "@u/handleCookie";
 
-const cookie = CookieParams(); //授权成功后的cookie
-const useLoginInfoPinia = useLoginInfo(); //用户信息
+const useLoginInfoPinia = useLoginInfo(); //登录信息
 
 /*
  *全局挂载方法和使用
@@ -31,7 +29,6 @@ provide("$vm", {
     MsgError,
     $router,
     $route,
-    cookie,
     useLoginInfoPinia,
 });
 </script>

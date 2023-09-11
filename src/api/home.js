@@ -5,10 +5,11 @@ import request from "../utils/request";
  * @description 获取登录的key
  * @param {}
  */
-export const loginKey = () =>
+export const loginKey = (data) =>
     request({
         method: "get",
         url: "/login/qr/key",
+        data: data,
     });
 
 /**
