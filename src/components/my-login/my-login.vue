@@ -31,8 +31,6 @@ let uniKeyImg = $ref("");
 let loginStatus = $ref(null);
 let loading = $ref(true);
 
-// https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/Refresh.png
-
 // 请求接口拿到key
 const getLogin = async () => {
     let { data } = await loginKey({ timestamp: new Date().getTime() });
@@ -50,7 +48,7 @@ const getQrimg = async () => {
 
 // 获取账号信息
 const getAccountInfo = async () => {
-    let { profile } = await userAccount({ cookie: vm.useLoginInfoPinia.userCookie });
+    let { profile } = await userAccount({ cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
     vm.useLoginInfoPinia.userInfo = profile;
 };
 
@@ -63,7 +61,6 @@ const getIntval = () => {
         let data = { key: unikey, noCookie: true, timestamp: new Date().getTime() };
         loginCheck(data).then((res) => {
             if (res.code == 803) {
-                clearInterval(loginStatus);
                 vm.MsgSuccess("授权成功");
                 vm.useLoginInfoPinia.$patch({
                     isDialogState: false, //关闭全局登录对话框
@@ -72,6 +69,7 @@ const getIntval = () => {
                     userTimestamp: new Date().getTime(), //登录成功的时间戳
                 });
                 getAccountInfo(); //授权成功后用cookie换取用户账号信息
+                clearInterval(loginStatus);
                 dialogVisible = false;
             } else if (res.code == 800) {
                 clearInterval(loginStatus);

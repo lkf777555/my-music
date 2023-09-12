@@ -1,22 +1,27 @@
 <template>
     <div class="page-box">
         <div class="users flex a-c">
-            <el-image src="lin.jpg" :zoom-rate="1.2" :preview-src-list="avatar" :initial-index="0" />
+            <el-image
+                :src="getUser.isLoginState ? getUser.userInfo.avatarUrl : ikunImg"
+                :zoom-rate="1.2"
+                :preview-src-list="getUser.isLoginState ? [getUser.userInfo.avatarUrl] : avatar"
+                :initial-index="0"
+            />
             <div class="users-info flex a-c">
                 <el-dropdown>
                     <span class="el-dropdown-link text-1">
-                        {{ vm.useLoginInfoPinia.isLoginState ? "上瘾1656399881" : "未登录" }}
+                        {{ getUser.isLoginState ? getUser.userInfo.nickname : "未登录" }}
                         <el-icon class="el-icon--right" size="10">
                             <arrow-down />
                         </el-icon>
                     </span>
                     <template #dropdown>
-                        <el-dropdown-menu v-if="vm.useLoginInfoPinia.isLoginState">
+                        <el-dropdown-menu v-if="getUser.isLoginState">
                             <!-- <el-dropdown-item>个人中心</el-dropdown-item> -->
                             <el-dropdown-item @click="goExit">退出登录</el-dropdown-item>
                         </el-dropdown-menu>
                         <el-dropdown-menu v-else>
-                            <el-dropdown-item @click="vm.useLoginInfoPinia.isDialogState = true">去登陆</el-dropdown-item>
+                            <el-dropdown-item @click="getUser.isDialogState = true">去登陆</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -38,6 +43,7 @@
 
 <script setup>
 import { ArrowDown } from "@element-plus/icons-vue";
+import { userLogout } from "@a/user";
 
 const props = defineProps({
     asideList: {
@@ -48,8 +54,11 @@ const props = defineProps({
 
 let vm = inject("$vm"),
     route = useRoute(),
-    avatar = $ref(["lin.jpg"]),
+    avatar = $ref(["https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/ikun.jpg"]),
+    ikunImg = $ref("https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/ikun.jpg"),
     activeRoute = $computed(() => route.path);
+
+const getUser = vm.useLoginInfoPinia;
 
 // 跳转页面
 const indexClick = (item) => {
@@ -57,8 +66,12 @@ const indexClick = (item) => {
 };
 
 //退出登录
-const goExit = () => {
-    vm.useLoginInfoPinia.$reset();
+const goExit = async () => {
+    let res = await userLogout({ cookie: encodeURIComponent(getUser.userCookie) });
+    if (res.code == 200) {
+        vm.MsgSuccess("退出登录成功");
+        getUser.$reset();
+    }
 };
 </script>
 <style lang="scss" scoped>
