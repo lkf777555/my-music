@@ -56,7 +56,7 @@ let { list: tdata2, loading: skLoading2, editParams: editParams2 } = useGetListA
 </script>
 <style lang="scss" scoped>
 .recommend {
-    margin: 20px 10px;
+    margin: 20px 0px 0px 0px;
     border-radius: 8px;
     background-color: #ffffff;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.13);

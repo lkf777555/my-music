@@ -56,6 +56,14 @@ const routes = [
                     title: "我的",
                 },
             },
+            {
+                path: "/person",
+                name: "person",
+                component: () => import("../views/person/index.vue"),
+                meta: {
+                    title: "个人信息",
+                },
+            },
         ],
     },
 ];
@@ -65,9 +73,19 @@ const router = createRouter({
     routes,
 });
 
+// 收保护的名单
+const whiteList = ["/person"];
+const user = JSON.parse(localStorage.getItem("user")) || {};
+
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title || "我的音乐";
-    next();
+    if (whiteList.includes(to.path)) {
+        if (user.isLoginState) {
+            next();
+        }
+    } else {
+        next();
+    }
 });
 
 // 导出路由
