@@ -5,10 +5,14 @@
 <script setup>
 let vm = inject("$vm");
 
-onMounted(() => {
-    if (!vm.useLoginInfoPinia.isLoginState) {
-        vm.useLoginInfoPinia.isDialogState = true;
-    }
-});
+watch(
+    () => vm.useLoginInfoPinia.isLoginState,
+    (value) => {
+        if (value == false) {
+            vm.useLoginInfoPinia.isDialogState = true;
+        }
+    },
+    { immediate: true }
+);
 </script>
 <style lang="scss" scoped></style>

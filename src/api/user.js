@@ -23,3 +23,15 @@ export const userLogout = (data) =>
         url: "/logout",
         data: data,
     });
+
+/**
+ * @method post
+ * @description 用户等级
+ * @param {}
+ */
+export const userLevel = (data) =>
+    request({
+        method: "post",
+        url: "/user/level",
+        data: data,
+    });

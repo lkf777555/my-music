@@ -13,8 +13,8 @@
             @close="dialogClose"
         >
             <div class="login-box flex f-c a-c j-a" v-loading="loading">
-                <div class="img-border flex a-c j-c"><img :src="uniKeyImg" /></div>
-                <div>使用<span @click="pushWy">网易云音乐APP</span> 扫码授权登录</div>
+                <div class="img-border flex a-c j-c" v-if="uniKeyImg"><img :src="uniKeyImg" /></div>
+                <div v-if="uniKeyImg">使用<span @click="pushWy">网易云音乐APP</span> 扫码授权登录</div>
             </div>
         </el-dialog>
     </div>

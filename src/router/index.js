@@ -73,21 +73,9 @@ const router = createRouter({
     routes,
 });
 
-// 收保护的名单
-const whiteList = ["/person"];
-const user = JSON.parse(localStorage.getItem("user")) || {};
-
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title || "我的音乐";
-    if (whiteList.includes(to.path)) {
-        if (user.isLoginState) {
-            next();
-        } else {
-            next("/home");
-        }
-    } else {
-        next();
-    }
+    next();
 });
 
 // 导出路由
