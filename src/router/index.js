@@ -82,6 +82,8 @@ router.beforeEach((to, from, next) => {
     if (whiteList.includes(to.path)) {
         if (user.isLoginState) {
             next();
+        } else {
+            next("/home");
         }
     } else {
         next();

@@ -67,10 +67,10 @@ const indexClick = (item) => {
 
 //退出登录
 const goExit = async () => {
-    let res = await userLogout({ cookie: encodeURIComponent(getUser.userCookie) });
+    let res = await userLogout({ cookie: encodeURIComponent(getUser.userCookie), timestamp: new Date().getTime() });
     if (res.code == 200) {
-        vm.MsgSuccess("退出登录成功");
         getUser.$reset();
+        vm.$router.go(0);
     }
 };
 </script>

@@ -48,7 +48,7 @@ const getQrimg = async () => {
 
 // 获取账号信息
 const getAccountInfo = async () => {
-    let { profile } = await userAccount({ cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
+    let { profile } = await userAccount({ cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie), timestamp: new Date().getTime() });
     vm.useLoginInfoPinia.userInfo = profile;
 };
 
