@@ -57,6 +57,7 @@ const getIntval = () => {
     loginStatus = setInterval(() => {
         if (!dialogVisible) {
             clearInterval(loginStatus);
+            loginStatus = null;
         }
         let data = { key: unikey, noCookie: true, timestamp: new Date().getTime() };
         loginCheck(data).then((res) => {
@@ -70,9 +71,11 @@ const getIntval = () => {
                 });
                 getAccountInfo(); //授权成功后用cookie换取用户账号信息
                 clearInterval(loginStatus);
+                loginStatus = null;
                 dialogVisible = false;
             } else if (res.code == 800) {
                 clearInterval(loginStatus);
+                loginStatus = null;
                 getLogin();
             }
         });
