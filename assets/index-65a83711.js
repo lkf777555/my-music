@@ -1,1 +1,0 @@
-import{q as a,w as i,B as s,J as n}from"./index-c3b79edf.js";const o={class:"page"},_={__name:"index",setup(c){let e=a("$vm");return i(()=>e.useLoginInfoPinia.isLoginState,t=>{t==!1&&(e.useLoginInfoPinia.isDialogState=!0)},{immediate:!0}),(t,r)=>(s(),n("div",o,"my"))}};export{_ as default};
