@@ -35,3 +35,15 @@ export const userLevel = (data) =>
         url: "/user/level",
         data: data,
     });
+
+/**
+ * @method post
+ * @description 更新用户信息
+ * @param {}
+ */
+export const userUpdate = (data) =>
+    request({
+        method: "post",
+        url: "/user/update",
+        data: data,
+    });

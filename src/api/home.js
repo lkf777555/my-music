@@ -74,7 +74,7 @@ export const getopAlbumList = (data) =>
 
 /**
  * @method get
- * @description 首页热碟上架
+ * @description 首页最新MV
  * @param {}
  */
 export const getopMVList = (data) =>

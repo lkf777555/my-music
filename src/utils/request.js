@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const errorCode = {
-    400: "参数错误",
     404: "访问资源不存在",
     800: "检测到二维码失效 正在为您更新二维码",
     500: "服务器内部错误，无法完成请求",
@@ -34,7 +33,7 @@ service.interceptors.response.use(
                 showClose: true,
                 message: errorCode[code],
                 type: "error",
-                duration: 5000,
+                duration: 3500,
             });
         }
 
@@ -48,7 +47,7 @@ service.interceptors.response.use(
                 showClose: true,
                 message: errorCode[code],
                 type: "error",
-                duration: 5000,
+                duration: 3500,
             });
         }
 

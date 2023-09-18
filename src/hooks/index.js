@@ -16,8 +16,10 @@ export const useGetListApi = (api, params = {}, custom) => {
     // 初始化请求数据
     const getApi = () => {
         api(params).then((res) => {
-            loading.value = false;
-            list.value = res[custom];
+            if (res.code === 200) {
+                loading.value = false;
+                list.value = res[custom];
+            }
         });
     };
     getApi();

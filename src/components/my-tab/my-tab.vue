@@ -87,7 +87,7 @@
             </template>
             <template #template>
                 <div class="flex j-b" style="flex-wrap: wrap">
-                    <div v-for="i in 10" style="padding: 0px 10px 10px 0px">
+                    <div v-for="i in 10" style="width: 20%; padding: 0px 10px 10px 0px">
                         <div>
                             <el-skeleton-item variant="p" style="width: 100%; height: 120px" />
                         </div>
