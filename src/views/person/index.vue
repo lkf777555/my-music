@@ -62,7 +62,7 @@
                     <template #default>
                         <el-form :model="form" label-width="120px">
                             <el-form-item label="昵称">
-                                <el-input v-model="form.nickname" />
+                                <el-input disabled v-model="getUser.nickname" />
                             </el-form-item>
                             <el-form-item label="性别">
                                 <el-radio-group v-model="form.gender">
@@ -102,8 +102,7 @@ let vm = inject("$vm"),
     getCookie = vm.useLoginInfoPinia.userCookie; //全局cookie
 
 const form = reactive({
-    nickname: getUser.nickname || "",
-    gender: getUser.gender || "",
+    gender: getUser.gender,
     birthday: getUser.birthday || "",
     signature: getUser.signature || "",
     cookie: encodeURIComponent(getCookie),
@@ -122,8 +121,6 @@ const getLevel = async () => {
     levelNextPlayCount = data.nextPlayCount - data.nowPlayCount;
 };
 
-getLevel();
-
 // 获取账号信息
 const getAccountInfo = async () => {
     let { profile } = await userAccount({ cookie: encodeURIComponent(getCookie), timestamp: new Date().getTime() });
@@ -132,16 +129,12 @@ const getAccountInfo = async () => {
 
 // 资料提交
 const onSubmit = async () => {
-    try {
-        let { code, message } = await userUpdate(form);
-        if (code == 200) {
-            vm.MsgSuccess("保存成功");
-            getAccountInfo();
-        } else {
-            vm.MsgError(message);
-        }
-    } catch (error) {
-        vm.MsgError(error.message);
+    let { code, message } = await userUpdate(form);
+    if (code == 200) {
+        vm.MsgSuccess("保存成功");
+        getAccountInfo();
+    } else {
+        vm.MsgError(message);
     }
 };
 
@@ -154,6 +147,9 @@ watch(
     },
     { immediate: true }
 );
+
+getAccountInfo();
+getLevel();
 </script>
 <style lang="scss" scoped>
 .info-img {
