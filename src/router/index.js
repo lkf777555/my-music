@@ -57,6 +57,14 @@ const routes = [
                 },
             },
             {
+                path: "/sheetDetails",
+                name: "sheetDetails",
+                component: () => import("../views/my/sheetDetails.vue"),
+                meta: {
+                    title: "歌单详情",
+                },
+            },
+            {
                 path: "/person",
                 name: "person",
                 component: () => import("../views/person/index.vue"),

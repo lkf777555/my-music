@@ -47,3 +47,39 @@ export const userUpdate = (data) =>
         url: "/user/update",
         data: data,
     });
+
+/**
+ * @method get
+ * @description 获取用户歌单
+ * @param {}
+ */
+export const userPlaylist = (data) =>
+    request({
+        method: "get",
+        url: "user/playlist",
+        data: data,
+    });
+
+/**
+ * @method get
+ * @description 获取用户关注列表
+ * @param {}
+ */
+export const userFollows = (data) =>
+    request({
+        method: "get",
+        url: "user/follows",
+        data: data,
+    });
+
+/**
+ * @method get
+ * @description 获取用户粉丝列表
+ * @param {}
+ */
+export const userFolloweds = (data) =>
+    request({
+        method: "get",
+        url: "user/followeds",
+        data: data,
+    });
