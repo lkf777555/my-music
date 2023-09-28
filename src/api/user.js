@@ -107,3 +107,15 @@ export const userPlaylistName = (data) =>
         url: "playlist/name/update",
         data: data,
     });
+
+/**
+ * @method get
+ * @description 歌单详情
+ * @param {}
+ */
+export const userPlaylistDetail = (data) =>
+    request({
+        method: "get",
+        url: "playlist/detail",
+        data: data,
+    });

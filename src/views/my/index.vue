@@ -8,7 +8,7 @@
                             <div style="width: 100px" class="flex a-c">
                                 <el-image style="width: 100px; height: 100px; border-radius: 8px" :src="row.coverImgUrl" />
                             </div>
-                            <div class="flex f-c j-b" style="margin-left: 10px; width: 86%">
+                            <div class="flex f-c j-b" style="margin-left: 10px; flex: 1">
                                 <div class="text-1 font-100" style="padding-top: 4px">
                                     {{ row.name }}
                                 </div>
@@ -34,11 +34,11 @@
                                     :initial-index="0"
                                 />
                             </div>
-                            <div class="flex f-c j-a" style="padding-left: 10px" v-if="row.signature !== ''">
+                            <div class="flex f-c j-a" style="padding-left: 10px; flex: 1" v-if="row.signature !== ''">
                                 <div>{{ row.nickname }}</div>
                                 <div class="font-100 text-1">{{ row.signature }}</div>
                             </div>
-                            <div v-else class="flex a-c" style="padding-left: 10px">{{ row.nickname }}</div>
+                            <div v-else class="flex a-c" style="padding-left: 10px; flex: 1">{{ row.nickname }}</div>
                         </div>
                     </template>
                 </cardlist>
@@ -56,11 +56,11 @@
                                     :initial-index="0"
                                 />
                             </div>
-                            <div class="flex f-c j-a" style="padding-left: 10px" v-if="row.signature !== ''">
+                            <div class="flex f-c j-a" style="padding-left: 10px; flex: 1" v-if="row.signature !== ''">
                                 <div>{{ row.nickname }}</div>
                                 <div class="font-100 text-1">{{ row.signature }}</div>
                             </div>
-                            <div v-else class="flex a-c" style="padding-left: 10px">{{ row.nickname }}</div>
+                            <div v-else class="flex a-c" style="padding-left: 10px; flex: 1">{{ row.nickname }}</div>
                         </div>
                     </template>
                 </cardlist>
