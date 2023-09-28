@@ -4,7 +4,7 @@
             <el-image
                 :src="getUser.isLoginState ? getUser.userInfo.avatarUrl : ikunImg"
                 :zoom-rate="1.2"
-                :preview-src-list="getUser.isLoginState ? [getUser.userInfo.avatarUrl] : avatar"
+                :preview-src-list="getUser.isLoginState ? [getUser.userInfo.avatarUrl] : ikunImg"
                 :initial-index="0"
             />
             <div class="users-info flex a-c">
@@ -27,7 +27,7 @@
                 </el-dropdown>
             </div>
         </div>
-        <div class="list flex f-c a-c">
+        <div class="flex f-c a-c">
             <div
                 v-for="(item, index) in asideList"
                 :key="index"
@@ -52,10 +52,9 @@ const props = defineProps({
     },
 });
 
-let vm = inject("$vm"),
+const vm = inject("$vm"),
     route = useRoute(),
-    avatar = $ref(["https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/ikun.jpg"]),
-    ikunImg = $ref("https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/ikun.jpg"),
+    ikunImg = "https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/ikun.jpg",
     activeRoute = $computed(() => route.path);
 
 const getUser = vm.useLoginInfoPinia;
@@ -83,7 +82,6 @@ const goExit = async () => {
 
     //顶部个人信息
     .users {
-        width: 100%;
         height: 60px;
         .el-image {
             padding-left: 31px;
@@ -109,24 +107,23 @@ const goExit = async () => {
     }
 
     // 菜单
-    .list {
-        width: 100%;
-        .list-header {
-            width: 80%;
-            height: 50px;
-            padding: 10px 12px;
-            cursor: pointer;
 
-            img {
-                width: 24px;
-                height: 24px;
-            }
-            .title {
-                margin-left: 10px;
-                font-weight: 100;
-            }
+    .list-header {
+        width: 80%;
+        height: 50px;
+        padding: 10px 12px;
+        cursor: pointer;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+        .title {
+            margin-left: 10px;
+            font-weight: 100;
         }
     }
+
     .active {
         transition: all 0.3s ease;
         background-color: #f4f5ff;

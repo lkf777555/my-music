@@ -19,7 +19,7 @@ const useLoginInfoPinia = useLoginInfo(); //登录信息
 /*
  *全局挂载方法和使用
  */
-let {
+const {
     appContext: {
         app: {
             config: {

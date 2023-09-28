@@ -39,20 +39,20 @@ const getVal2 = (val, inx) => {
 };
 
 //获取banner轮播图数据
-let { list: swiperList, loading } = useGetListApi(getBannerList, {}, "banners");
+const { list: swiperList, loading } = useGetListApi(getBannerList, {}, "banners");
 
 // 获取热门推荐
-let { list: tdata, loading: skLoading, editParams } = useGetListApi(getopPlayList, { limit: 6, order: "hot", cat: "", offset: 0 }, "playlists");
+const { list: tdata, loading: skLoading, editParams } = useGetListApi(getopPlayList, { limit: 6, order: "hot", cat: "", offset: 0 }, "playlists");
 
 // 获取新碟上架
-let {
+const {
     list: tdata1,
     loading: skLoading1,
     editParams: editParams1,
 } = useGetListApi(getopAlbumList, { limit: 12, offset: 0, area: "", type: "new", year: "", month: "" }, "monthData");
 
 //获取mv列表
-let { list: tdata2, loading: skLoading2, editParams: editParams2 } = useGetListApi(getopMVList, { limit: 10, offset: 0, area: "", type: "", order: "" }, "data");
+const { list: tdata2, loading: skLoading2, editParams: editParams2 } = useGetListApi(getopMVList, { limit: 10, offset: 0, area: "", type: "", order: "" }, "data");
 </script>
 <style lang="scss" scoped>
 .recommend {

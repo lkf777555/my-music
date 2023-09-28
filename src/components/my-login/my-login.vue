@@ -24,7 +24,7 @@
 import { loginKey, loginImg, loginCheck } from "@a/home";
 import { userAccount } from "@a/user";
 
-let vm = inject("$vm");
+const vm = inject("$vm");
 let dialogVisible = $ref(true);
 let unikey = $ref("");
 let uniKeyImg = $ref("");

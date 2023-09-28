@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-let props = defineProps({
+const props = defineProps({
     list: {
         type: Array,
         default: () => {},
@@ -29,7 +29,7 @@ let props = defineProps({
     },
 });
 
-let vm = inject("$vm");
+const vm = inject("$vm");
 
 const pushClick = (item) => {
     vm.MsgSuccess("待开发");

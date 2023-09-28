@@ -1,11 +1,10 @@
 <template>
-    <div>
-        <div class="list flex j-b">
-            <el-card class="box-card" v-for="(item, index) in list" :key="index">
-                <slot name="cont" :row="item"></slot>
-            </el-card>
-        </div>
+    <div class="list flex j-b" v-if="list.length > 0">
+        <el-card class="box-card" v-for="(item, index) in list" :key="index">
+            <slot name="cont" :row="item"></slot>
+        </el-card>
     </div>
+    <div v-else><el-empty description="暂无数据" /></div>
 </template>
 
 <script setup>

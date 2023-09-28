@@ -8,11 +8,14 @@
                             <div style="width: 100px" class="flex a-c">
                                 <el-image style="width: 100px; height: 100px; border-radius: 8px" :src="row.coverImgUrl" />
                             </div>
-                            <div class="flex f-c j-b" style="padding-left: 10px">
+                            <div class="flex f-c j-b" style="margin-left: 10px; width: 86%">
                                 <div class="text-1 font-100" style="padding-top: 4px">
                                     {{ row.name }}
                                 </div>
-                                <div class="font-100" style="padding-bottom: 4px">{{ row.trackCount }}首</div>
+                                <div class="font-100 flex a-c j-b" style="padding-bottom: 4px">
+                                    <div>{{ row.trackCount }}首</div>
+                                    <el-icon @click.stop="editSheet(row)" size="18"><More /></el-icon>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -63,23 +66,78 @@
                 </cardlist>
             </el-tab-pane>
         </el-tabs>
+        <el-drawer v-model="drawer" direction="rtl">
+            <template #header>
+                <h4>{{ form.name == "" ? "--" : form.name }}</h4>
+            </template>
+            <template #default>
+                <el-form :model="form" label-width="120px" ref="ruleFormRef">
+                    <el-form-item label="歌单名称" prop="name">
+                        <el-input v-model="form.name" />
+                    </el-form-item>
+                    <el-form-item label="歌单描述" prop="desc">
+                        <el-input v-model="form.desc" />
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">保存</el-button>
+                        <el-button @click="resetForm(ruleFormRef)">重置</el-button>
+                    </el-form-item>
+                </el-form>
+            </template>
+            <template #footer>
+                <div style="flex: auto">
+                    <el-button type="primary" @click="drawer = false">关闭</el-button>
+                </div>
+            </template>
+        </el-drawer>
     </div>
 </template>
 
 <script setup>
-import { userPlaylist, userFollows, userFolloweds } from "@a/user";
+import { userPlaylist, userFollows, userFolloweds, userPlaylistDesc, userPlaylistName } from "@a/user";
 import { useGetListApi } from "@h/index";
 import cardlist from "./components/card-list";
+import { More } from "@element-plus/icons-vue";
 
-let vm = inject("$vm");
+const vm = inject("$vm");
 const activeName = $ref("sheet");
+const ruleFormRef = $ref(null);
+let drawer = $ref(false);
+const form = reactive({
+    name: "",
+    desc: "",
+    id: "",
+});
 
-let { list } = useGetListApi(userPlaylist, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "playlist"); //获取我的歌单
-let { list: list1 } = useGetListApi(userFollows, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "follow"); //获取用户关注列表
-let { list: list2 } = useGetListApi(userFolloweds, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "followeds"); //获取用户粉丝列表
+const { list } = useGetListApi(userPlaylist, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "playlist"); //获取我的歌单
+const { list: list1 } = useGetListApi(userFollows, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "follow"); //获取用户关注列表
+const { list: list2 } = useGetListApi(userFolloweds, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "followeds"); //获取用户粉丝列表
 
 const pushClick = (item) => {
     vm.$router.push({ path: "sheetDetails", query: { id: item.id, name: item.name } });
+};
+
+const editSheet = (row) => {
+    drawer = true;
+    nextTick(() => {
+        form.id = row.id;
+        form.name = row.name;
+        form.desc = row.description;
+    });
+};
+
+const onSubmit = async () => {
+    const { code } = await userPlaylistDesc({ id: form.id, desc: form.desc, cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
+    const { code: code1 } = await userPlaylistName({ id: form.id, name: form.name, cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
+    if (code == 200 && code1 == 200) {
+        drawer = false;
+        vm.MsgSuccess("保存成功");
+    }
+};
+
+const resetForm = (formEl) => {
+    if (!formEl) return;
+    formEl.resetFields();
 };
 
 watch(

@@ -93,8 +93,8 @@ import { userLevel, userUpdate, userAccount } from "@a/user";
 import { formatDate } from "@u/date";
 import { cityList } from "./city";
 
-let vm = inject("$vm"),
-    levelNum = $ref(0),
+const vm = inject("$vm");
+let levelNum = $ref(0),
     levelProgress = $ref(0),
     levelNextPlayCount = $ref(0),
     loading = $ref(true),
@@ -114,7 +114,7 @@ const economize = cityList.filter((item) => item.code == getUser.province); //�
 
 // 获取等级信息
 const getLevel = async () => {
-    let { data } = await userLevel({ cookie: encodeURIComponent(getCookie), timestamp: new Date().getTime() });
+    const { data } = await userLevel({ cookie: encodeURIComponent(getCookie), timestamp: new Date().getTime() });
     loading = false;
     levelNum = data.level;
     levelProgress = Math.trunc(data.progress * 100);

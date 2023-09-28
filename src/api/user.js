@@ -83,3 +83,27 @@ export const userFolloweds = (data) =>
         url: "user/followeds",
         data: data,
     });
+
+/**
+ * @method get
+ * @description 更新歌单描述
+ * @param {}
+ */
+export const userPlaylistDesc = (data) =>
+    request({
+        method: "get",
+        url: "/playlist/desc/update",
+        data: data,
+    });
+
+/**
+ * @method get
+ * @description 更新歌单名
+ * @param {}
+ */
+export const userPlaylistName = (data) =>
+    request({
+        method: "get",
+        url: "playlist/name/update",
+        data: data,
+    });

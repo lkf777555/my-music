@@ -7,14 +7,11 @@ import { ref } from "vue";
  */
 export const useGetListApi = (api, params = {}, custom) => {
     let list = ref([]);
-    let loading = ref(true);
-    // 修改参数 attr/属性名 value/值
-    const editParams = (attr, value) => {
-        params[attr] = value;
-        getApi();
-    };
+    let loading = ref(false);
+
     // 初始化请求数据
     const getApi = () => {
+        loading.value = true;
         api(params).then((res) => {
             if (res.code === 200) {
                 loading.value = false;
@@ -23,6 +20,12 @@ export const useGetListApi = (api, params = {}, custom) => {
         });
     };
     getApi();
+
+    // 修改参数 attr/属性名 value/值
+    const editParams = (attr, value) => {
+        params[attr] = value;
+        getApi();
+    };
     return {
         list,
         loading,

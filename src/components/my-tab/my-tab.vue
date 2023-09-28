@@ -17,7 +17,9 @@
                             <span class="music-tag font-100" v-for="(inm, inx) in item.tags" :key="inx">#{{ inm }}</span>
                         </div>
                         <div class="music-position flex a-c">
-                            <img src="https://lkf777555-1309934855.cos.ap-beijing.myqcloud.com/img/headset.png" />
+                            <div class="flex a-c">
+                                <el-icon size="16"><Headset /></el-icon>
+                            </div>
                             <div>
                                 {{ formartNum(item.playCount) }}
                             </div>
@@ -108,7 +110,7 @@
 </template>
 
 <script setup>
-import { VideoPlay } from "@element-plus/icons-vue";
+import { VideoPlay, Headset } from "@element-plus/icons-vue";
 
 const props = defineProps({
     list: {
@@ -131,8 +133,8 @@ const props = defineProps({
 
 const emit = defineEmits(["myClick"]);
 
-let activeIndex = $ref("0"),
-    vm = inject("$vm");
+let activeIndex = $ref("0");
+const vm = inject("$vm");
 
 // 点击tab触发
 const indexClick = (item, index) => {

@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-let asideList = $ref([
+const asideList = $ref([
     {
         title: "首页",
         link: "/home",

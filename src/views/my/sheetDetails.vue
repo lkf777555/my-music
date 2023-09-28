@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-let vm = inject("$vm");
+const vm = inject("$vm");
 const route = useRoute();
 const params = reactive({
     id: route.query.id,
