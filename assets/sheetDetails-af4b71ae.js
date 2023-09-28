@@ -1,1 +1,0 @@
-import{i as t,X as s,aa as n,o as r,b as o,Z as c,e as i}from"./index-902dfc4b.js";const _={__name:"sheetDetails",setup(u){t("$vm");const e=s(),a=n({id:e.query.id,name:e.query.name});return(m,l)=>(r(),o("div",null,c(i(a).name),1))}};export{_ as default};
