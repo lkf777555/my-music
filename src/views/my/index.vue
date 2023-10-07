@@ -3,7 +3,7 @@
         <el-tabs v-model="activeName">
             <el-tab-pane label="我的歌单" name="sheet">
                 <cardlist :list="list">
-                    <template #cont="{ row }">
+                    <template #cont="{ row, index }">
                         <div class="flex" style="cursor: pointer" @click="pushClick(row)">
                             <div style="width: 100px" class="flex a-c">
                                 <el-image style="width: 100px; height: 100px; border-radius: 8px" :src="row.coverImgUrl" />
@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="font-100 flex a-c j-b" style="padding-bottom: 4px">
                                     <div>{{ row.trackCount }}首</div>
-                                    <el-icon @click.stop="editSheet(row)" size="18"><More /></el-icon>
+                                    <el-icon v-if="index > 1" @click.stop="editSheet(row)" size="18"><More /></el-icon>
                                 </div>
                             </div>
                         </div>
