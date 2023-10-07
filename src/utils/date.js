@@ -8,3 +8,11 @@ export const formatDate = (timeStamp) => {
     const seconds = date.getSeconds();
     return year + "-" + month + "-" + day + "  " + hours + ":" + minutes + ":" + seconds + "";
 };
+
+export const formatMillisecond = (timeStamp) => {
+    const all = Math.floor(timeStamp / 1000);
+    const minutes = Math.floor(all / 60);
+    const seconds = all % 60;
+    const result = minutes + ":" + (seconds < 10 ? `0${seconds}` : seconds);
+    return result;
+};

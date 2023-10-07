@@ -119,3 +119,15 @@ export const userPlaylistDetail = (data) =>
         url: "playlist/detail",
         data: data,
     });
+
+/**
+ * @method get
+ * @description 获取歌曲url
+ * @param {}
+ */
+export const userSongUrl = (data) =>
+    request({
+        method: "get",
+        url: "song/url",
+        data: data,
+    });

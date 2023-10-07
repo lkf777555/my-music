@@ -73,14 +73,14 @@
             <template #default>
                 <el-form :model="form" label-width="120px" ref="ruleFormRef">
                     <el-form-item label="歌单名称" prop="name">
-                        <el-input v-model="form.name" />
+                        <el-input v-model="form.name" clearable />
                     </el-form-item>
                     <el-form-item label="歌单描述" prop="desc">
-                        <el-input v-model="form.desc" />
+                        <el-input v-model="form.desc" clearable />
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">保存</el-button>
-                        <el-button @click="resetForm(ruleFormRef)">重置</el-button>
+                        <el-button @click="resetForm(ruleFormRef)" :disabled="form.desc == '' && form.name == ''">重置</el-button>
                     </el-form-item>
                 </el-form>
             </template>
@@ -128,10 +128,12 @@ const editSheet = (row) => {
 
 const onSubmit = async () => {
     const { code } = await userPlaylistDesc({ id: form.id, desc: form.desc, cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
-    const { code: code1 } = await userPlaylistName({ id: form.id, name: form.name, cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
+    const { code: code1, message: message1 } = await userPlaylistName({ id: form.id, name: form.name, cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
     if (code == 200 && code1 == 200) {
         drawer = false;
         vm.MsgSuccess("保存成功");
+    } else if (code1 == 401) {
+        vm.MsgError(message1);
     }
 };
 

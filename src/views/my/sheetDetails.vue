@@ -11,7 +11,7 @@
             <div class="header flex" v-loading="loading">
                 <div class="header-img" v-if="loading == false">
                     <el-image
-                        style="width: 200px; height: 200px; border-radius: 8px"
+                        style="width: 180px; height: 180px; border-radius: 8px"
                         :src="sheet.coverImgUrl"
                         :zoom-rate="1.2"
                         :preview-src-list="[sheet.coverImgUrl]"
@@ -45,20 +45,69 @@
                 </div>
             </div>
         </el-card>
-        <el-table :data="tableData" style="width: 100%; margin-top: 30px" stripe>
-            <el-table-column type="index" label="序号" width="60" />
-            <el-table-column prop="date" label="歌曲" />
-            <el-table-column prop="name" label="歌手" />
-            <el-table-column prop="address" label="专辑" />
-            <el-table-column prop="address" label="时长" />
+        <el-table
+            :data="tableData"
+            style="width: 100%; margin-top: 20px; cursor: pointer"
+            stripe
+            @cell-mouse-enter="onMouseEnter"
+            @cell-mouse-leave="currentName = ''"
+            @cell-click="cellClick"
+        >
+            <el-table-column type="index" label="序号" width="60" align="center">
+                <template #default="{ row, column, $index }">
+                    <div v-if="currentName == row.name" class="flex a-c j-c">
+                        <el-icon size="28"><VideoPlay /></el-icon>
+                    </div>
+                    <div v-else>{{ $index + 1 }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column label="名称">
+                <template #default="{ row }">
+                    <div class="flex a-c">
+                        <el-image style="width: 38px; height: 38px; border-radius: 8px" :src="row.al.picUrl" />
+                        <div style="margin-left: 8px">{{ row.name }}</div>
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column label="歌手" show-overflow-tooltip>
+                <template #default="{ row }">
+                    <div class="flex">
+                        <el-tag v-for="(item, index) in row.ar" :key="index" style="margin: 0px 4px" round effect="dark" type="success"> {{ item.name }} </el-tag>
+                    </div>
+                </template>
+            </el-table-column>
+            <el-table-column label="专辑">
+                <template #default="{ row }">
+                    {{ row.al.name }}
+                </template>
+            </el-table-column>
+            <el-table-column label="时长">
+                <template #default="{ row }">
+                    {{ formatMillisecond(row.dt) }}
+                </template>
+            </el-table-column>
         </el-table>
+        <div style="margin-top: 10px">
+            <el-config-provider :locale="zhCn">
+                <el-pagination
+                    v-model:current-page="currentPage"
+                    v-model:page-size="pageSize"
+                    background
+                    :page-sizes="[10, 50, 100]"
+                    layout="sizes, prev, pager, next"
+                    :total="allData.length"
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+            /></el-config-provider>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { Headset } from "@element-plus/icons-vue";
-import { userPlaylistDetail } from "@a/user";
-import { formatDate } from "@u/date";
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
+import { Headset, VideoPlay } from "@element-plus/icons-vue";
+import { userPlaylistDetail, userSongUrl } from "@a/user";
+import { formatDate, formatMillisecond } from "@u/date";
 
 const vm = inject("$vm");
 const route = useRoute();
@@ -67,49 +116,69 @@ const params = reactive({
     name: route.query.name,
 });
 
+let loading = $ref(true);
 let sheet = $ref({}); //歌单信息
 let creatorInfo = $ref({}); //个人信息
-let loading = $ref(true); //
+let tableData = $ref([]); //表格数据
+let allData = $ref([]);
+let currentName = $ref(""); //当前移入歌曲
+let currentPage = $ref(1);
+let pageSize = $ref(10);
 
-const tableData = [
-    {
-        date: "2016-05-03",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-    },
-    {
-        date: "2016-05-02",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-    },
-    {
-        date: "2016-05-04",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-    },
-    {
-        date: "2016-05-01",
-        name: "Tom",
-        address: "No. 189, Grove St, Los Angeles",
-    },
-];
+const getTableData = () => {
+    tableData = allData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+};
 
+// 获取歌单信息
 const getList = async () => {
     const res = await userPlaylistDetail({ id: params.id, cookie: encodeURIComponent(vm.useLoginInfoPinia.userCookie) });
     sheet = res.playlist;
     creatorInfo = res.playlist.creator;
+    allData = res.playlist.tracks;
+    getTableData();
     loading = false;
 };
 
 getList();
+
+// 当单元格 hover 进入时会触发该事件
+const onMouseEnter = (row) => {
+    currentName = row.name;
+};
+
+// 当某个单元格被点击时会触发该事件
+const cellClick = async (row) => {
+    const { code, data } = await userSongUrl({ id: row.id });
+    if (code == 200) {
+        if (data[0].url !== null) {
+            const link = document.createElement("a");
+            link.href = data[0].url;
+            link.target = "_blank";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
+            vm.MsgError("暂无资源");
+        }
+    }
+};
+
+const handleSizeChange = (val) => {
+    pageSize = val;
+    getTableData();
+};
+
+const handleCurrentChange = (val) => {
+    currentPage = val;
+    getTableData();
+};
 </script>
 <style lang="scss" scoped>
 .box-card {
-    width: 70%;
     .header {
-        height: 200px;
+        height: 180px;
         &-img {
-            width: 200px;
+            width: 180px;
         }
         &-info {
             flex: 1;

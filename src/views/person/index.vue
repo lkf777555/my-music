@@ -60,27 +60,29 @@
                 <el-card>
                     <template #header>基本资料</template>
                     <template #default>
-                        <el-form :model="form" label-width="120px">
-                            <el-form-item label="昵称">
-                                <el-input disabled v-model="getUser.nickname" />
-                            </el-form-item>
-                            <el-form-item label="性别">
-                                <el-radio-group v-model="form.gender">
-                                    <el-radio :label="0">保密</el-radio>
-                                    <el-radio :label="1">男</el-radio>
-                                    <el-radio :label="2">女</el-radio>
-                                </el-radio-group>
-                            </el-form-item>
-                            <el-form-item label="出生日期">
-                                <el-date-picker v-model="form.birthday" type="date" value-format="x" placeholder="请选择出生日期" />
-                            </el-form-item>
-                            <el-form-item label="签名">
-                                <el-input v-model="form.signature" type="textarea" />
-                            </el-form-item>
-                            <el-form-item>
-                                <el-button type="primary" @click="onSubmit">保存</el-button>
-                            </el-form-item>
-                        </el-form>
+                        <el-config-provider :locale="zhCn">
+                            <el-form :model="form" label-width="120px">
+                                <el-form-item label="昵称">
+                                    <el-input disabled v-model="getUser.nickname" />
+                                </el-form-item>
+                                <el-form-item label="性别">
+                                    <el-radio-group v-model="form.gender">
+                                        <el-radio :label="0">保密</el-radio>
+                                        <el-radio :label="1">男</el-radio>
+                                        <el-radio :label="2">女</el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                                <el-form-item label="出生日期">
+                                    <el-date-picker v-model="form.birthday" type="date" value-format="x" placeholder="请选择出生日期" />
+                                </el-form-item>
+                                <el-form-item label="签名">
+                                    <el-input v-model="form.signature" type="textarea" />
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="primary" @click="onSubmit">保存</el-button>
+                                </el-form-item>
+                            </el-form>
+                        </el-config-provider>
                     </template>
                 </el-card>
             </el-col>
@@ -89,6 +91,7 @@
 </template>
 
 <script setup>
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 import { userLevel, userUpdate, userAccount } from "@a/user";
 import { formatDate } from "@u/date";
 import { cityList } from "./city";
