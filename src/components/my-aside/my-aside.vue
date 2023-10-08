@@ -1,12 +1,8 @@
 <template>
     <div class="page-box">
         <div class="users flex a-c">
-            <el-image
-                :src="getUser.isLoginState ? getUser.userInfo.avatarUrl : ikunImg"
-                :zoom-rate="1.2"
-                :preview-src-list="getUser.isLoginState ? [getUser.userInfo.avatarUrl] : ikunImg"
-                :initial-index="0"
-            />
+            <el-image v-if="getUser.isLoginState" :src="getUser.userInfo.avatarUrl" :zoom-rate="1.2" :preview-src-list="[getUser.userInfo.avatarUrl]" :initial-index="0" />
+            <el-image v-else :src="ikunImg" :zoom-rate="1.2" :preview-src-list="[ikunImg]" :initial-index="0" />
             <div class="users-info flex a-c">
                 <el-dropdown>
                     <span class="el-dropdown-link text-1">

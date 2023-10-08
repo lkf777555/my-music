@@ -93,7 +93,7 @@
                     v-model:current-page="currentPage"
                     v-model:page-size="pageSize"
                     background
-                    :page-sizes="[10, 50, 100]"
+                    :page-sizes="[20, 50, 100]"
                     layout="sizes, prev, pager, next"
                     :total="allData.length"
                     @size-change="handleSizeChange"
@@ -123,7 +123,7 @@ let tableData = $ref([]); //表格数据
 let allData = $ref([]);
 let currentName = $ref(""); //当前移入歌曲
 let currentPage = $ref(1);
-let pageSize = $ref(10);
+let pageSize = $ref(20);
 
 const getTableData = () => {
     tableData = allData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
