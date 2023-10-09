@@ -2,6 +2,7 @@
     <div>
         <router-view></router-view>
         <my-login v-if="useLoginInfoPinia.isDialogState"></my-login>
+        <my-audio></my-audio>
     </div>
 </template>
 <script setup>

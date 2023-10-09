@@ -7,6 +7,12 @@ export const useLoginInfo = defineStore("user", {
         userInfo: {}, //用户信息
         isLoginState: false, //登录状态
         isDialogState: false, //全局登录弹框状态
+        audioInfo: {
+            isPlaying: false, //播放器状态
+            isState: false, //是否播放
+            currentTarget: -1,
+            list: [],
+        },
     }),
     getters: {},
     actions: {},
@@ -17,6 +23,11 @@ export const useLoginInfo = defineStore("user", {
                 key: "user",
                 storage: localStorage,
                 paths: ["userCookie", "userTimestamp", "userInfo", "isLoginState"],
+            },
+            {
+                key: "playerInfo",
+                storage: localStorage,
+                paths: ["audioInfo"],
             },
         ],
     },

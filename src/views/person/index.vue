@@ -127,7 +127,7 @@ const getLevel = async () => {
 // 获取账号信息
 const getAccountInfo = async () => {
     let { profile } = await userAccount({ cookie: encodeURIComponent(getCookie), timestamp: new Date().getTime() });
-    vm.useLoginInfoPinia.userInfo = profile;
+    vm.useLoginInfoPinia.$patch({ userInfo: profile });
 };
 
 // 资料提交
