@@ -81,9 +81,8 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.afterEach((to, from) => {
     document.title = to.meta.title || "我的音乐";
-    next();
 });
 
 // 导出路由

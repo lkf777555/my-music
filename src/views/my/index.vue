@@ -95,7 +95,6 @@
 
 <script setup>
 import { userPlaylist, userFollows, userFolloweds, userPlaylistDesc, userPlaylistName } from "@a/user";
-import { useGetListApi } from "@h/index";
 import cardlist from "./components/card-list";
 import { More } from "@element-plus/icons-vue";
 
@@ -108,10 +107,22 @@ const form = reactive({
     desc: "",
     id: "",
 });
+let list = $ref([]);
+let list1 = $ref([]);
+let list2 = $ref([]);
 
-const { list } = useGetListApi(userPlaylist, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "playlist"); //获取我的歌单
-const { list: list1 } = useGetListApi(userFollows, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "follow"); //获取用户关注列表
-const { list: list2 } = useGetListApi(userFolloweds, { limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId }, "followeds"); //获取用户粉丝列表
+const getList = async () => {
+    if (vm.useLoginInfoPinia.isLoginState) {
+        const { playlist } = await userPlaylist({ limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId });
+        list = playlist;
+        const { follow } = await userFollows({ limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId });
+        list1 = follow;
+        const { followeds } = await userFolloweds({ limit: 100, uid: vm.useLoginInfoPinia.userInfo.userId });
+        list2 = followeds;
+    }
+};
+
+getList();
 
 const pushClick = (item) => {
     vm.$router.push({ path: "sheetDetails", query: { id: item.id, name: item.name } });
