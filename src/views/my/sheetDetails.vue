@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <my-table :tableList="tableList" stripe></my-table>
+            <my-table :tableList="tableList" :row-class-name="tableRowClassName"></my-table>
         </el-card>
     </div>
 </template>
@@ -77,6 +77,13 @@ const getList = async () => {
 };
 
 getList();
+
+const tableRowClassName = ({ row }) => {
+    if (row.license) {
+        return "danger";
+    }
+    return "";
+};
 </script>
 <style lang="scss" scoped>
 .box-card {
@@ -114,5 +121,8 @@ getList();
             }
         }
     }
+}
+:deep(.el-table .danger) {
+    --el-table-tr-bg-color: var(--el-color-danger-light-9);
 }
 </style>

@@ -1,39 +1,42 @@
 <template>
     <div>
-        <el-table
-            :data="tableData"
-            style="width: 100%; margin-top: 20px; cursor: pointer"
-            v-bind="$attrs"
-            @cell-mouse-enter="onMouseEnter"
-            @cell-mouse-leave="currentName = ''"
-            @cell-click="cellClick"
-        >
+        <el-table :data="tableData" style="width: 100%; margin-top: 20px; cursor: pointer" v-bind="$attrs" @cell-mouse-enter="onMouseEnter" @cell-mouse-leave="currentName = ''">
             <el-table-column type="index" label="序号" width="60" align="center">
                 <template #default="{ row, column, $index }">
-                    <div v-if="currentName == row.name" class="flex a-c j-c">
+                    <div v-if="currentName == row.name && !row.vip" class="flex a-c j-c" @click="cellClick(row)">
                         <el-icon size="28"><VideoPlay /></el-icon>
                     </div>
-                    <div v-else>{{ $index + 1 }}</div>
+                    <div v-else :style="isVip(row)">{{ $index + 1 }}</div>
                 </template>
             </el-table-column>
             <el-table-column label="名称" width="600">
                 <template #default="{ row }">
-                    <div class="flex a-c">
+                    <div class="flex a-c" :style="isVip(row)">
                         <el-image style="width: 38px; height: 38px; border-radius: 8px" :src="row.album.picUrl" />
                         <div style="margin-left: 8px">{{ row.name }}</div>
                         <div v-if="row.vip">
-                            <el-tag style="margin-left: 8px" round effect="dark" type="danger"> {{ row.vip ? "VIP" : "" }}</el-tag>
+                            <el-tag style="margin-left: 8px" round effect="dark" type="danger" size="small"> {{ row.vip ? "VIP" : "" }}</el-tag>
                         </div>
                     </div>
                 </template>
             </el-table-column>
             <el-table-column label="歌手" show-overflow-tooltip>
                 <template #default="{ row }">
-                    <el-tag v-for="(item, index) in row.singer" :key="index" style="margin: 0px 4px" round effect="light" type="success"> {{ item.name }} </el-tag>
+                    <el-tag v-for="(item, index) in row.singer" :key="index" style="margin: 0px 4px" round effect="light" :type="row.vip ? 'danger' : 'success'">
+                        {{ item.name }}
+                    </el-tag>
                 </template>
             </el-table-column>
-            <el-table-column label="专辑" prop="album.name"> </el-table-column>
-            <el-table-column label="时长" prop="duration"> </el-table-column>
+            <el-table-column label="专辑">
+                <template #default="{ row }">
+                    <div :style="isVip(row)">{{ row.album.name }}</div>
+                </template>
+            </el-table-column>
+            <el-table-column label="时长">
+                <template #default="{ row }">
+                    <div :style="isVip(row)">{{ row.duration }}</div>
+                </template>
+            </el-table-column>
         </el-table>
         <div style="margin-top: 10px">
             <el-config-provider :locale="zhCn">
@@ -63,6 +66,10 @@ const props = defineProps({
     },
 });
 
+const isVip = $computed(() => {
+    return (row) => (row.vip ? "color: #F56C6C" : "");
+});
+
 let tableData = $ref([]); //表格数据
 let currentName = $ref(""); //当前移入歌曲
 let currentPage = $ref(1);
@@ -77,8 +84,9 @@ const onMouseEnter = (row) => {
     currentName = row.name;
 };
 
-// 当某个单元格被点击时会触发该事件
+// 点击表格中播放按钮
 const cellClick = async (row) => {
+    if (row.vip) return;
     const { code, data } = await userSongUrl({ id: row.id });
     if (code == 200) {
         if (data[0].url !== null) {
